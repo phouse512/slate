@@ -77,6 +77,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let heightConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|-16-[v0]-16-|", options: [], metrics: nil, views: ["v0": questionView])
         allConstraints += heightConstraint
         
+        // coin horizontal constraint
         let coinHeightConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|-16-[v0(60)]", options: [], metrics: nil, views: ["v0": coinView])
         allConstraints += coinHeightConstraint
         
