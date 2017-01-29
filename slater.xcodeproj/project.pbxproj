@@ -300,6 +300,7 @@
 				23FBC4A41E399D330097F43E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
