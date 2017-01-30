@@ -31,7 +31,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     func collectionView(_: UICollectionView, layout: UICollectionViewLayout, sizeForItemAt: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 200)
+        return CGSize(width: view.frame.width, height: 150)
     }
     
     func collectionView(_: UICollectionView, layout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -42,6 +42,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
  class PollCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupCoinView()
         setupViews()
     }
     
@@ -66,11 +67,67 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return view
     }()
     
+    let timeView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.green
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    let voteView: UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.cyan
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    // Coin Stuff
+    let coinImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "coin")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+        imageView.backgroundColor = UIColor.blue
+        return imageView
+    }()
+    
+    let coinLabel: UILabel = {
+        let label = UILabel()
+        label.text = "30"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.backgroundColor = UIColor.green
+        return label
+    }()
+    
+    func setupCoinView() {
+        coinView.addSubview(coinImage)
+        coinView.addSubview(coinLabel)
+        
+        var coinConstraints = [NSLayoutConstraint]()
+        
+        let heightConstraint = NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]-8-|", options: [], metrics: nil, views: ["v0": coinImage])
+        coinConstraints += heightConstraint
+        
+        let heightConstraint2 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]-8-|", options: [], metrics: nil, views: ["v0": coinLabel])
+        coinConstraints += heightConstraint2
+        
+        let horizontalConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|-8-[v0(==v1)]-4-[v1(==v0)]-8-|", options: [], metrics: nil, views: ["v0": coinImage, "v1": coinLabel])
+        coinConstraints += horizontalConstraint
+        
+        NSLayoutConstraint.activate(coinConstraints)
+        
+    }
+    
     func setupViews() {
         // do stuff
         addSubview(questionView)
         addSubview(separatorView)
         addSubview(coinView)
+        addSubview(timeView)
+        addSubview(voteView)
+        
+        
         
         var allConstraints = [NSLayoutConstraint]()
         
@@ -78,11 +135,17 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         allConstraints += heightConstraint
         
         // coin horizontal constraint
-        let coinHeightConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|-16-[v0(60)]", options: [], metrics: nil, views: ["v0": coinView])
+        let coinHeightConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|-16-[v0(==v1)]-8-[v1(==v0)]-8-[v2(==v0)]-16-|", options: [], metrics: nil, views: ["v0": coinView, "v1": timeView, "v2": voteView])
         allConstraints += coinHeightConstraint
         
         let verticalConstraint = NSLayoutConstraint.constraints(withVisualFormat: "V:|-16-[v0]-8-[v2(40)]-16-[v1(1)]|", options: [], metrics: nil, views: ["v0": questionView, "v1": separatorView, "v2": coinView])
         allConstraints += verticalConstraint
+        
+        let verticalConstraint2 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-16-[v0]-8-[v2(40)]-16-[v1(1)]|", options: [], metrics: nil, views: ["v0": questionView, "v1": separatorView, "v2": timeView])
+        allConstraints += verticalConstraint2
+        
+        let verticalConstraint3 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-16-[v0]-8-[v2(40)]-16-[v1(1)]|", options: [], metrics: nil, views: ["v0": questionView, "v1": separatorView, "v2": voteView])
+        allConstraints += verticalConstraint3
         
         let separatorHeightConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: [], metrics: nil, views: ["v0": separatorView])
         allConstraints += separatorHeightConstraint
