@@ -1,45 +1,15 @@
 //
-//  ViewController.swift
+//  PollCell.swift
 //  slater
 //
-//  Created by Philip House on 1/25/17.
+//  Created by Philip House on 1/30/17.
 //  Copyright © 2017 phizzle. All rights reserved.
 //
 
 import UIKit
 
-class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        navigationItem.title = "Home"
-        
-        collectionView?.backgroundColor = UIColor.white
-        
-        collectionView?.register(PollCell.self, forCellWithReuseIdentifier: "cellId")
-    }
- 
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
-        
-        return cell
-    }
-    
-    func collectionView(_: UICollectionView, layout: UICollectionViewLayout, sizeForItemAt: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 150)
-    }
-    
-    func collectionView(_: UICollectionView, layout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-}
-
- class PollCell: UICollectionViewCell {
+class PollCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupQuestionView()
