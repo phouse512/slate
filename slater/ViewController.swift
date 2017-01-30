@@ -42,15 +42,27 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
  class PollCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupQuestionView()
+        setupTimeView()
         setupCoinView()
+        setupVoteView()
         setupViews()
     }
     
+    // question view
     let questionView : UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.blue
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
+    }()
+    
+    let questionLabel : UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.backgroundColor = UIColor.red
+        label.text = "Bulls or Cavaliers - 2/03/17"
+        return label
     }()
     
     let separatorView: UIView = {
@@ -67,6 +79,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return view
     }()
     
+    // time view details
     let timeView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.green
@@ -74,11 +87,38 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return view
     }()
     
+    let timeLabel: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = UIColor.red
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "5 hours left"
+        return label
+    }()
+    
+    // Vote View details
     let voteView: UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.cyan
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
+    }()
+    
+    let voteImage: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "users")
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.contentMode = .scaleAspectFit
+        imageView.clipsToBounds = true
+        imageView.backgroundColor = UIColor.green
+        return imageView
+    }()
+    
+    let voteLabel: UILabel = {
+        let label = UILabel()
+        label.text = "12"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.backgroundColor = UIColor.red
+        return label
     }()
     
     // Coin Stuff
@@ -100,6 +140,51 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return label
     }()
     
+    func setupQuestionView() {
+        questionView.addSubview(questionLabel)
+        
+        var questionConstraints = [NSLayoutConstraint]()
+        
+        
+        let heightConstraint = NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]-8-|", options: [], metrics: nil, views: ["v0": questionLabel])
+        questionConstraints += heightConstraint
+        
+        let widthConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|-8-[v0]-8-|", options: [], metrics: nil, views: ["v0": questionLabel])
+        questionConstraints += widthConstraint
+        
+        NSLayoutConstraint.activate(questionConstraints)
+    }
+    
+    func setupTimeView() {
+        timeView.addSubview(timeLabel)
+        
+        var timeConstraints = [NSLayoutConstraint]()
+        
+        let heightConstraint = NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]-8-|", options: [], metrics: nil, views: ["v0": timeLabel])
+        timeConstraints += heightConstraint
+        
+        let widthConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|-8-[v0]-8-|", options: [], metrics: nil, views: ["v0": timeLabel])
+        timeConstraints += widthConstraint
+        
+        NSLayoutConstraint.activate(timeConstraints)
+    }
+    
+    func setupVoteView() {
+        voteView.addSubview(voteImage)
+        voteView.addSubview(voteLabel)
+        var voteConstraints = [NSLayoutConstraint]()
+        
+        let heightContraint = NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]-8-|", options: [], metrics: nil, views: ["v0": voteImage])
+        voteConstraints += heightContraint
+        let heightContraint2 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]-8-|", options: [], metrics: nil, views: ["v0": voteLabel])
+        voteConstraints += heightContraint2
+        
+        let horizontalConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|-8-[v0(==v1)]-4-[v1(==v0)]-8-|", options: [], metrics: nil, views: ["v0": voteImage, "v1": voteLabel])
+        voteConstraints += horizontalConstraint
+        
+        NSLayoutConstraint.activate(voteConstraints)
+    }
+    
     func setupCoinView() {
         coinView.addSubview(coinImage)
         coinView.addSubview(coinLabel)
@@ -116,7 +201,6 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         coinConstraints += horizontalConstraint
         
         NSLayoutConstraint.activate(coinConstraints)
-        
     }
     
     func setupViews() {
