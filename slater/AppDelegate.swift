@@ -20,12 +20,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         
         let layout = UICollectionViewFlowLayout()
+//        layout.scrollDirection = .horizontal
         window?.rootViewController = UINavigationController(rootViewController: HomeController(collectionViewLayout: layout))
         
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         
         UINavigationBar.appearance().barTintColor = UIColor.green
+        
+        application.statusBarStyle = .lightContent // change font color of ios icons at top
+        
+        let statusBarBackgroundView = UIView()
+        statusBarBackgroundView.backgroundColor = UIColor.darkGray
+        statusBarBackgroundView.translatesAutoresizingMaskIntoConstraints = false
+        
+        window?.addSubview(statusBarBackgroundView)
+        window?.addConstraintsWithFormat(format: "H:|[v0]|", views: statusBarBackgroundView)
+        window?.addConstraintsWithFormat(format: "V:|[v0(20)]", views: statusBarBackgroundView)
         return true
     }
 

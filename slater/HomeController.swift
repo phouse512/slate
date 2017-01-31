@@ -17,6 +17,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }()
     
     var polls: [Poll]?
+    let cellId = "cellId"
     
     func fetchPolls() {
         ApiService.sharedInstance.fetchPolls { (polls: [Poll]) in
@@ -37,35 +38,62 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         titleLabel.font = UIFont.systemFont(ofSize: 20)
         navigationItem.titleView = titleLabel
         
+
+        setupCollectionView()
+        setupMenuBar()
+        fetchPolls()
+    }
+    
+    func setupCollectionView() {
+        
+        // allows for horizontal scrolling
+        if let flowLayout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
+            flowLayout.scrollDirection = .horizontal
+            flowLayout.minimumLineSpacing = 0
+        }
+        
         collectionView?.backgroundColor = UIColor.white
         
-        collectionView?.register(PollCell.self, forCellWithReuseIdentifier: "cellId")
+        //collectionView?.register(PollCell.self, forCellWithReuseIdentifier: "cellId")
+        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
         
         collectionView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
         collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 0, 0)
         
-        setupMenuBar()
-        fetchPolls()
+        collectionView?.isPagingEnabled = true
     }
- 
+    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return polls?.count ?? 0
+        return 4
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! PollCell
-        
-        cell.poll = polls?[indexPath.item]
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        cell.backgroundColor = UIColor.blue
         return cell
     }
     
-    func collectionView(_: UICollectionView, layout: UICollectionViewLayout, sizeForItemAt: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: 150)
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: view.frame.width, height: view.frame.height)
     }
-    
-    func collectionView(_: UICollectionView, layout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
+//    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return polls?.count ?? 0
+//    }
+//    
+//    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! PollCell
+//        
+//        cell.poll = polls?[indexPath.item]
+//        return cell
+//    }
+//    
+//    func collectionView(_: UICollectionView, layout: UICollectionViewLayout, sizeForItemAt: IndexPath) -> CGSize {
+//        return CGSize(width: view.frame.width, height: 150)
+//    }
+//    
+//    func collectionView(_: UICollectionView, layout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+//        return 0
+//    }
     
     private func setupMenuBar() {
         navigationController?.hidesBarsOnSwipe = true
