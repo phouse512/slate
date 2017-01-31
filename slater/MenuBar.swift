@@ -20,6 +20,8 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
         return cv
     }()
     
+    var horizontalBarLeftAnchorConstraint: NSLayoutConstraint?
+    
     let cellId = "cellId"
     let imageNames = ["home", "chart", "calendar", "user"]
     
@@ -35,6 +37,36 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
         // initialize first menubar to select the home button to start
         let selectedIndexPath = NSIndexPath(item: 0, section: 0)
         collectionView.selectItem(at: selectedIndexPath as IndexPath, animated: false, scrollPosition: .top)
+        
+        setupHorizontalBar()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+
+    // this code sets up the little white highlight bar underneath menubar icons
+    func setupHorizontalBar() {
+        let horizontalBarView = UIView()
+        horizontalBarView.backgroundColor = UIColor.white
+        horizontalBarView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(horizontalBarView)
+        
+        // pin horizontal highlight bar to bottom of the menu bar
+        horizontalBarLeftAnchorConstraint = horizontalBarView.leftAnchor.constraint(equalTo: self.leftAnchor)
+        horizontalBarLeftAnchorConstraint?.isActive = true
+        horizontalBarView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
+        horizontalBarView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/4).isActive = true
+        horizontalBarView.heightAnchor.constraint(equalToConstant: 4).isActive = true
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let x = CGFloat(indexPath.item) * frame.width/4
+        horizontalBarLeftAnchorConstraint?.constant = x
+        
+        UIView.animate(withDuration: 0.75, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
+            self.layoutIfNeeded()
+        }, completion: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -58,9 +90,6 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
         return 0
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
 }
 
 class MenuCell: BaseCell {

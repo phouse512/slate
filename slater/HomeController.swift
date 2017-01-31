@@ -15,12 +15,27 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         mb.translatesAutoresizingMaskIntoConstraints = false
         return mb
     }()
+    
+    var polls: [Poll]?
+    
+    func fetchPolls() {
+        ApiService.sharedInstance.fetchPolls { (polls: [Poll]) in
+            self.polls = polls
+            self.collectionView?.reloadData()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "Home"
         navigationController?.navigationBar.isTranslucent = false
+        
+        let titleLabel = UILabel(frame: CGRect(x: 0, y: 0, width: view.frame.width-32, height: view.frame.height))
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.text = "Home"
+        titleLabel.textColor = UIColor.white
+        titleLabel.font = UIFont.systemFont(ofSize: 20)
+        navigationItem.titleView = titleLabel
         
         collectionView?.backgroundColor = UIColor.white
         
@@ -30,15 +45,17 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 0, 0)
         
         setupMenuBar()
+        fetchPolls()
     }
  
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return polls?.count ?? 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! PollCell
         
+        cell.poll = polls?[indexPath.item]
         return cell
     }
     
@@ -51,15 +68,18 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     private func setupMenuBar() {
+        navigationController?.hidesBarsOnSwipe = true
+        
+        let redView = UIView()
+        redView.backgroundColor = UIColor.green
+        view.addSubview(redView)
+        view.addConstraintsWithFormat(format: "H:|[v0]|", views: redView)
+        view.addConstraintsWithFormat(format: "V:[v0(50)]", views: redView)
+        
         view.addSubview(menuBar)
+        view.addConstraintsWithFormat(format: "H:|[v0]|", views: menuBar)
+        view.addConstraintsWithFormat(format: "V:|[v0(50)]", views: menuBar)
         
-        var constraints = [NSLayoutConstraint]()
-        
-        let menuBarConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: [], metrics: nil, views: ["v0": menuBar])
-        let menuBarVertConstraint = NSLayoutConstraint.constraints(withVisualFormat: "V:|[v0(50)]", options: [], metrics: nil, views: ["v0": menuBar])
-        constraints += menuBarConstraint
-        constraints += menuBarVertConstraint
-        NSLayoutConstraint.activate(constraints)
-        
+        menuBar.topAnchor.constraint(equalTo: topLayoutGuide.bottomAnchor).isActive = true
     }
 }

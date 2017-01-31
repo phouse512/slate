@@ -25,6 +25,21 @@ class BaseCell: UICollectionViewCell {
 
 
 class PollCell: UICollectionViewCell {
+    
+    var poll: Poll? {
+        didSet {
+            questionLabel.text = poll?.title
+            
+            if let buyIn = poll?.buyIn {
+                coinLabel.text = "\(buyIn)"
+            }
+            
+            if let votes = poll?.currentVoteCount {
+                voteLabel.text = "\(votes)"
+            }
+        }
+    }
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupQuestionView()
@@ -47,6 +62,7 @@ class PollCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = UIColor.red
         label.text = "Bulls or Cavaliers - 2/03/17"
+        label.numberOfLines = 2
         return label
     }()
     
