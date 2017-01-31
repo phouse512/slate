@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		239594621E3FE91F005B790D /* PollCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239594611E3FE91F005B790D /* PollCell.swift */; };
+		239594651E3FEAA7005B790D /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239594641E3FEAA7005B790D /* MenuBar.swift */; };
+		239594681E3FEF9F005B790D /* AddConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239594671E3FEF9F005B790D /* AddConstraints.swift */; };
+		2395946B1E400FD5005B790D /* Poll.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2395946A1E400FD5005B790D /* Poll.swift */; };
 		23FBC4941E399D330097F43E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FBC4931E399D330097F43E /* AppDelegate.swift */; };
 		23FBC4961E399D330097F43E /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FBC4951E399D330097F43E /* HomeController.swift */; };
 		23FBC4991E399D330097F43E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23FBC4971E399D330097F43E /* Main.storyboard */; };
@@ -17,6 +20,9 @@
 
 /* Begin PBXFileReference section */
 		239594611E3FE91F005B790D /* PollCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollCell.swift; sourceTree = "<group>"; };
+		239594641E3FEAA7005B790D /* MenuBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
+		239594671E3FEF9F005B790D /* AddConstraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddConstraints.swift; sourceTree = "<group>"; };
+		2395946A1E400FD5005B790D /* Poll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Poll.swift; sourceTree = "<group>"; };
 		23FBC4901E399D330097F43E /* slater.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = slater.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23FBC4931E399D330097F43E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		23FBC4951E399D330097F43E /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
@@ -41,6 +47,7 @@
 			isa = PBXGroup;
 			children = (
 				239594611E3FE91F005B790D /* PollCell.swift */,
+				239594641E3FEAA7005B790D /* MenuBar.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -51,6 +58,22 @@
 				23FBC4951E399D330097F43E /* HomeController.swift */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		239594661E3FEF86005B790D /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				239594671E3FEF9F005B790D /* AddConstraints.swift */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
+		239594691E400FCC005B790D /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2395946A1E400FD5005B790D /* Poll.swift */,
+			);
+			name = Model;
 			sourceTree = "<group>";
 		};
 		23FBC4871E399D330097F43E = {
@@ -72,6 +95,8 @@
 		23FBC4921E399D330097F43E /* slater */ = {
 			isa = PBXGroup;
 			children = (
+				239594691E400FCC005B790D /* Model */,
+				239594661E3FEF86005B790D /* Helpers */,
 				239594631E3FE947005B790D /* Controller */,
 				239594601E3FE8CB005B790D /* View */,
 				23FBC4931E399D330097F43E /* AppDelegate.swift */,
@@ -158,7 +183,10 @@
 			files = (
 				23FBC4961E399D330097F43E /* HomeController.swift in Sources */,
 				23FBC4941E399D330097F43E /* AppDelegate.swift in Sources */,
+				239594651E3FEAA7005B790D /* MenuBar.swift in Sources */,
 				239594621E3FE91F005B790D /* PollCell.swift in Sources */,
+				2395946B1E400FD5005B790D /* Poll.swift in Sources */,
+				239594681E3FEF9F005B790D /* AddConstraints.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
