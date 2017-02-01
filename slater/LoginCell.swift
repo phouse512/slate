@@ -10,6 +10,8 @@ import UIKit
 
 class LoginCell: UICollectionViewCell {
     
+    weak var delegate: LoginControllerDelegate?
+    
     let userTextField: LeftPaddedTextField = {
         let textField = LeftPaddedTextField()
         textField.placeholder = "email.."
@@ -30,13 +32,19 @@ class LoginCell: UICollectionViewCell {
         return textField
     }()
     
-    let loginButton: UIButton = {
+    lazy var loginButton: UIButton = {
         let button = UIButton(type: .system)
         button.backgroundColor = .orange
         button.setTitle("Log In", for: .normal)
         button.setTitleColor(.white, for: .normal)
+        button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         return button
     }()
+    
+    func handleLogin() {
+        print("yo")
+        delegate?.finishLoggingIn()
+    }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
