@@ -19,9 +19,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         
-        let layout = UICollectionViewFlowLayout()
 //        layout.scrollDirection = .horizontal
-        window?.rootViewController = UINavigationController(rootViewController: HomeController(collectionViewLayout: layout))
+//        window?.rootViewController = UINavigationController(rootViewController: HomeController(collectionViewLayout: layout))
+        
+        window?.rootViewController = MainNavigationController()
         
         // get rid of black bar between nav bar/ menu bar
         UINavigationBar.appearance().shadowImage = UIImage()
