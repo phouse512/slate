@@ -18,6 +18,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }()
     
     let cellId = "cellId"
+    let accountCellId = "accountId"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -78,6 +79,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         collectionView?.backgroundColor = UIColor.white
         collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView?.register(AccountCell.self, forCellWithReuseIdentifier: accountCellId)
+        
         
         collectionView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
         collectionView?.scrollIndicatorInsets = UIEdgeInsetsMake(50, 0, 0, 0)
@@ -94,6 +97,11 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if indexPath.item == 3 {
+            let accountCell = collectionView.dequeueReusableCell(withReuseIdentifier: accountCellId, for: indexPath) as! AccountCell
+            return accountCell
+        }
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
         //let colors: [UIColor] = [.blue, .green, .gray, .purple]
         
