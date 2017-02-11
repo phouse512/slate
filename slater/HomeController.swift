@@ -19,6 +19,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     let cellId = "cellId"
     let accountCellId = "accountId"
+    let leaderboardId = "leaderboardId"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,6 +81,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         collectionView?.backgroundColor = UIColor.white
         collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: cellId)
         collectionView?.register(AccountCell.self, forCellWithReuseIdentifier: accountCellId)
+        collectionView?.register(LeaderboardCell.self, forCellWithReuseIdentifier: leaderboardId)
         
         
         collectionView?.contentInset = UIEdgeInsetsMake(50, 0, 0, 0)
@@ -100,6 +102,9 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         if indexPath.item == 3 {
             let accountCell = collectionView.dequeueReusableCell(withReuseIdentifier: accountCellId, for: indexPath) as! AccountCell
             return accountCell
+        } else if indexPath.item == 1 {
+            let leaderboardCell = collectionView.dequeueReusableCell(withReuseIdentifier: leaderboardId, for: indexPath) as! LeaderboardCell
+            return leaderboardCell
         }
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)

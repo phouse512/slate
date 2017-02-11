@@ -24,6 +24,9 @@ class BaseCell: UICollectionViewCell {
 }
 
 
+// this class represents the individual poll that is a part of 
+//  the collectionview in feedcell
+
 class PollCell: UICollectionViewCell {
     
     var poll: Poll? {

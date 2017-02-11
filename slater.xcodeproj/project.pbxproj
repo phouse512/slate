@@ -19,6 +19,9 @@
 		239594781E427C16005B790D /* LoginCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239594771E427C16005B790D /* LoginCell.swift */; };
 		2395947A1E428E98005B790D /* Anchors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239594791E428E98005B790D /* Anchors.swift */; };
 		23A7AEA21E4D3ED90083CA53 /* AccountCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A7AEA11E4D3ED90083CA53 /* AccountCell.swift */; };
+		23A7AEA41E4D60C90083CA53 /* LeaderboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A7AEA31E4D60C90083CA53 /* LeaderboardCell.swift */; };
+		23A7AEA61E4D64AE0083CA53 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A7AEA51E4D64AE0083CA53 /* User.swift */; };
+		23A7AEA81E4D65930083CA53 /* LeaderboardCellItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A7AEA71E4D65930083CA53 /* LeaderboardCellItem.swift */; };
 		23FBC4941E399D330097F43E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FBC4931E399D330097F43E /* AppDelegate.swift */; };
 		23FBC4961E399D330097F43E /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FBC4951E399D330097F43E /* HomeController.swift */; };
 		23FBC4991E399D330097F43E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23FBC4971E399D330097F43E /* Main.storyboard */; };
@@ -39,6 +42,9 @@
 		239594771E427C16005B790D /* LoginCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginCell.swift; sourceTree = "<group>"; };
 		239594791E428E98005B790D /* Anchors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Anchors.swift; sourceTree = "<group>"; };
 		23A7AEA11E4D3ED90083CA53 /* AccountCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountCell.swift; sourceTree = "<group>"; };
+		23A7AEA31E4D60C90083CA53 /* LeaderboardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaderboardCell.swift; sourceTree = "<group>"; };
+		23A7AEA51E4D64AE0083CA53 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		23A7AEA71E4D65930083CA53 /* LeaderboardCellItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaderboardCellItem.swift; sourceTree = "<group>"; };
 		23FBC4901E399D330097F43E /* slater.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = slater.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23FBC4931E399D330097F43E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		23FBC4951E399D330097F43E /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
@@ -67,6 +73,8 @@
 				239594711E4161A8005B790D /* FeedCell.swift */,
 				239594771E427C16005B790D /* LoginCell.swift */,
 				23A7AEA11E4D3ED90083CA53 /* AccountCell.swift */,
+				23A7AEA31E4D60C90083CA53 /* LeaderboardCell.swift */,
+				23A7AEA71E4D65930083CA53 /* LeaderboardCellItem.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -95,6 +103,7 @@
 			isa = PBXGroup;
 			children = (
 				2395946A1E400FD5005B790D /* Poll.swift */,
+				23A7AEA51E4D64AE0083CA53 /* User.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -214,8 +223,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				23FBC4961E399D330097F43E /* HomeController.swift in Sources */,
+				23A7AEA41E4D60C90083CA53 /* LeaderboardCell.swift in Sources */,
 				23FBC4941E399D330097F43E /* AppDelegate.swift in Sources */,
+				23A7AEA81E4D65930083CA53 /* LeaderboardCellItem.swift in Sources */,
 				239594651E3FEAA7005B790D /* MenuBar.swift in Sources */,
+				23A7AEA61E4D64AE0083CA53 /* User.swift in Sources */,
 				239594761E4274B0005B790D /* MainNavigationController.swift in Sources */,
 				239594621E3FE91F005B790D /* PollCell.swift in Sources */,
 				23A7AEA21E4D3ED90083CA53 /* AccountCell.swift in Sources */,

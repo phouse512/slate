@@ -12,8 +12,10 @@ class ApiService: NSObject {
     
     static let sharedInstance = ApiService()
     
+    let baseUrl = "http://localhost:8080/"
+    
     func fetchPolls(completion: @escaping ([Poll]) -> ()) {
-        let url = URL(string: "http://localhost:8080/")
+        let url = URL(string: baseUrl + "")
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
             
             if error != nil {
@@ -42,6 +44,37 @@ class ApiService: NSObject {
             }
             
             
-            }.resume()
+        }.resume()
+    }
+    
+    func fetchLeaders(completion: @escaping ([User]) -> ()) {
+        let url = URL(string: baseUrl + "leaderboard")
+        URLSession.shared.dataTask(with: url!) { (data, response, error) in
+            
+            if error != nil {
+                print(error!)
+                return
+            }
+            
+            do {
+                let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
+                print(json)
+                
+                var users = [User]()
+                for dictionary in json as! [[String: AnyObject]] {
+                    let user = User()
+                    user.balance = dictionary["buy_in"] as! Int?
+                    user.username = dictionary["username"] as! String?
+                    users.append(user)
+                }
+                
+                DispatchQueue.main.async {
+                    completion(users)
+                }
+            } catch let jsonError {
+                print(jsonError)
+            }
+            
+        }.resume()
     }
 }
