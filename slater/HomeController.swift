@@ -40,14 +40,14 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     func setupNavBarButtons() {
-        let searchImage = UIImage(named: "search2")
-        searchImage?.withRenderingMode(.alwaysOriginal)
-        let searchBarButtomItem = UIBarButtonItem(image: searchImage, style: .plain, target: self, action: #selector(handleSearch))
-        
-        let moreButton = UIBarButtonItem(image: UIImage(named: "more2")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleMore))
-        
-        
-        navigationItem.rightBarButtonItems = [moreButton, searchBarButtomItem]
+//        let searchImage = UIImage(named: "search2")
+//        searchImage?.withRenderingMode(.alwaysOriginal)
+//        let searchBarButtomItem = UIBarButtonItem(image: searchImage, style: .plain, target: self, action: #selector(handleSearch))
+//        
+//        let moreButton = UIBarButtonItem(image: UIImage(named: "more2")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleMore))
+//        
+//        
+//        navigationItem.rightBarButtonItems = [moreButton, searchBarButtomItem]
     }
     
     func handleSearch() {
@@ -78,7 +78,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
             flowLayout.minimumLineSpacing = 0
         }
         
-        collectionView?.backgroundColor = UIColor.white
+        collectionView?.backgroundColor = UIColor(red: 83/255, green: 90/255, blue: 116/255, alpha: 1)
         collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: cellId)
         collectionView?.register(AccountCell.self, forCellWithReuseIdentifier: accountCellId)
         collectionView?.register(LeaderboardCell.self, forCellWithReuseIdentifier: leaderboardId)
@@ -133,7 +133,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         let redView = UIView()
         redView.translatesAutoresizingMaskIntoConstraints = false
-        redView.backgroundColor = UIColor.green
+        redView.backgroundColor = UIColor(red: 18/255, green: 20/255, blue: 32/255, alpha: 1)
         view.addSubview(redView)
         view.addConstraintsWithFormat(format: "H:|[v0]|", views: redView)
         view.addConstraintsWithFormat(format: "V:[v0(50)]", views: redView)

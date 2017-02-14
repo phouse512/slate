@@ -14,7 +14,7 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.backgroundColor = UIColor.green
+        cv.backgroundColor = UIColor(red: 18/255, green: 20/255, blue: 32/255, alpha: 1)
         cv.dataSource = self
         cv.delegate = self
         return cv
@@ -50,7 +50,7 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
     // this code sets up the little white highlight bar underneath menubar icons
     func setupHorizontalBar() {
         let horizontalBarView = UIView()
-        horizontalBarView.backgroundColor = UIColor.white
+        horizontalBarView.backgroundColor = UIColor(red: 83/255, green: 90/255, blue: 116/255, alpha: 1)
         horizontalBarView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(horizontalBarView)
         
@@ -81,7 +81,7 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MenuCell
         
         cell.imageView.image = UIImage(named: imageNames[indexPath.item])?.withRenderingMode(.alwaysTemplate)
-        cell.tintColor = UIColor.darkGray
+        cell.tintColor = UIColor.white
         return cell
     }
     
@@ -102,6 +102,7 @@ class MenuCell: BaseCell {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "home")?.withRenderingMode(.alwaysTemplate)
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.tintColor = UIColor.darkGray
         return imageView
     }()
     

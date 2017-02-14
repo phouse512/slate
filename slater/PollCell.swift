@@ -52,12 +52,20 @@ class PollCell: UICollectionViewCell {
         setupViews()
     }
     
+    // sidebar view
+    let sidebarView : UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.red
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     // holder view of everything
     let holderView : UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.white
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 5
+        view.layer.cornerRadius = 8
         view.layer.masksToBounds = true
         return view
     }()
@@ -160,10 +168,10 @@ class PollCell: UICollectionViewCell {
         var questionConstraints = [NSLayoutConstraint]()
         
         
-        let heightConstraint = NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]-8-|", options: [], metrics: nil, views: ["v0": questionLabel])
+        let heightConstraint = NSLayoutConstraint.constraints(withVisualFormat: "V:|[v0]-8-|", options: [], metrics: nil, views: ["v0": questionLabel])
         questionConstraints += heightConstraint
         
-        let widthConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|-8-[v0]-8-|", options: [], metrics: nil, views: ["v0": questionLabel])
+        let widthConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: [], metrics: nil, views: ["v0": questionLabel])
         questionConstraints += widthConstraint
         
         NSLayoutConstraint.activate(questionConstraints)
@@ -211,7 +219,7 @@ class PollCell: UICollectionViewCell {
         let heightConstraint2 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]-8-|", options: [], metrics: nil, views: ["v0": coinLabel])
         coinConstraints += heightConstraint2
         
-        let horizontalConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|-8-[v0(==v1)]-4-[v1(==v0)]-8-|", options: [], metrics: nil, views: ["v0": coinImage, "v1": coinLabel])
+        let horizontalConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0(15)]-4-[v1(30)]|", options: [], metrics: nil, views: ["v0": coinImage, "v1": coinLabel])
         coinConstraints += horizontalConstraint
         
         NSLayoutConstraint.activate(coinConstraints)
@@ -230,31 +238,36 @@ class PollCell: UICollectionViewCell {
         holderView.addSubview(coinView)
         holderView.addSubview(timeView)
         holderView.addSubview(voteView)
+        holderView.addSubview(sidebarView)
         
         addSubview(holderView)
         
-        addConstraintsWithFormat(format: "H:|-5-[v0]-5-|", views: holderView)
+        addConstraintsWithFormat(format: "H:|-10-[v0]-10-|", views: holderView)
         addConstraintsWithFormat(format: "V:|-5-[v0]-5-|", views: holderView)
+        
+        
+        
+        addConstraintsWithFormat(format: "V:|[v0]|", views: sidebarView)
         
         
         
         var allConstraints = [NSLayoutConstraint]()
         
-        let heightConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|-16-[v0]-16-|", options: [], metrics: nil, views: ["v0": questionView])
+        let heightConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|[v1(8)]-8-[v0]-4-|", options: [], metrics: nil, views: ["v1": sidebarView, "v0": questionView])
         allConstraints += heightConstraint
         
         // coin horizontal constraint
-        let coinHeightConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|-16-[v0(==v1)]-8-[v1(==v0)]-8-[v2(==v0)]-16-|", options: [], metrics: nil, views: ["v0": coinView, "v1": timeView, "v2": voteView])
+        let coinHeightConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|[v3(8)]-8-[v0(==v1)]-8-[v1(==v0)]-8-[v2(==v0)]-4-|", options: [], metrics: nil, views: ["v0": coinView, "v1": timeView, "v2": voteView, "v3": sidebarView])
         allConstraints += coinHeightConstraint
 
         // this is the old separator
-        let verticalConstraint = NSLayoutConstraint.constraints(withVisualFormat: "V:|-16-[v0]-8-[v2(40)]-16-|", options: [], metrics: nil, views: ["v0": questionView, "v2": coinView])
+        let verticalConstraint = NSLayoutConstraint.constraints(withVisualFormat: "V:|-4-[v0]-8-[v2(40)]-4-|", options: [], metrics: nil, views: ["v0": questionView, "v2": coinView])
         allConstraints += verticalConstraint
         
-        let verticalConstraint2 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-16-[v0]-8-[v2(40)]-16-|", options: [], metrics: nil, views: ["v0": questionView, "v2": timeView])
+        let verticalConstraint2 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-4-[v0]-8-[v2(40)]-4-|", options: [], metrics: nil, views: ["v0": questionView, "v2": timeView])
         allConstraints += verticalConstraint2
         
-        let verticalConstraint3 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-16-[v0]-8-[v2(40)]-16-|", options: [], metrics: nil, views: ["v0": questionView, "v2": voteView])
+        let verticalConstraint3 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-4-[v0]-8-[v2(40)]-4-|", options: [], metrics: nil, views: ["v0": questionView, "v2": voteView])
         allConstraints += verticalConstraint3
         
 //        let separatorHeightConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: [], metrics: nil, views: ["v0": separatorView])

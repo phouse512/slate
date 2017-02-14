@@ -21,6 +21,10 @@ class FeedCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate, 
     }()
     
     let cellId = "pollId"
+    let sidebarColors = [UIColor(red: 181/255, green: 105/255, blue: 193/255, alpha: 1),
+                         UIColor(red: 87/266, green: 165/255, blue: 63/255, alpha: 1),
+                         UIColor(red: 246/255, green: 171/255, blue: 26/255, alpha: 1),
+                         UIColor(red: 234/255, green: 85/255, blue: 78/255, alpha: 1)]
     
     var polls: [Poll]?
     
@@ -50,6 +54,7 @@ class FeedCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate, 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! PollCell
         cell.poll = polls?[indexPath.item]
+        cell.sidebarView.backgroundColor = sidebarColors[indexPath.item % sidebarColors.count]
         return cell
     }
     
