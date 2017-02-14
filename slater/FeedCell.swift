@@ -14,7 +14,7 @@ class FeedCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate, 
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.backgroundColor = UIColor.white
+        cv.backgroundColor = UIColor(red: 83/255, green: 90/255, blue: 116/255, alpha: 1)
         cv.dataSource = self
         cv.delegate = self
         return cv

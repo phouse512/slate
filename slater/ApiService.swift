@@ -12,11 +12,15 @@ class ApiService: NSObject {
     
     static let sharedInstance = ApiService()
     
-    let baseUrl = "http://localhost:8080/"
+    let baseUrl = "https://xvv348wbr5.execute-api.us-east-1.amazonaws.com/prod/"
+    let apiKey = "PT0e0Rt3Jp46n6XwN466t8Huqs6vGNrv30OYHWT1"
     
     func fetchPolls(completion: @escaping ([Poll]) -> ()) {
-        let url = URL(string: baseUrl + "")
-        URLSession.shared.dataTask(with: url!) { (data, response, error) in
+        let url = URL(string: baseUrl + "polls")
+        var request = URLRequest(url: url!)
+        request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
             
             if error != nil {
                 print(error!)
@@ -49,7 +53,10 @@ class ApiService: NSObject {
     
     func fetchLeaders(completion: @escaping ([User]) -> ()) {
         let url = URL(string: baseUrl + "leaderboard")
-        URLSession.shared.dataTask(with: url!) { (data, response, error) in
+        var request = URLRequest(url: url!)
+        request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
             
             if error != nil {
                 print(error!)

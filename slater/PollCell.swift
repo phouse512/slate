@@ -52,10 +52,20 @@ class PollCell: UICollectionViewCell {
         setupViews()
     }
     
+    // holder view of everything
+    let holderView : UIView = {
+        let view = UIView()
+        view.backgroundColor = UIColor.white
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.layer.cornerRadius = 5
+        view.layer.masksToBounds = true
+        return view
+    }()
+    
     // question view
     let questionView : UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.blue
+        view.backgroundColor = UIColor.white
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -63,7 +73,7 @@ class PollCell: UICollectionViewCell {
     let questionLabel : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = UIColor.red
+        label.backgroundColor = UIColor.white
         label.text = "Bulls or Cavaliers - 2/03/17"
         label.numberOfLines = 2
         return label
@@ -71,14 +81,14 @@ class PollCell: UICollectionViewCell {
     
     let separatorView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.black
+        view.backgroundColor = UIColor.white
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     let coinView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.red
+        view.backgroundColor = UIColor.white
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -86,14 +96,14 @@ class PollCell: UICollectionViewCell {
     // time view details
     let timeView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.green
+        view.backgroundColor = UIColor.white
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     let timeLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = UIColor.red
+        label.backgroundColor = UIColor.white
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "5 hours left"
         return label
@@ -102,7 +112,7 @@ class PollCell: UICollectionViewCell {
     // Vote View details
     let voteView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.cyan
+        view.backgroundColor = UIColor.white
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -113,7 +123,7 @@ class PollCell: UICollectionViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
-        imageView.backgroundColor = UIColor.green
+        imageView.backgroundColor = UIColor.white
         return imageView
     }()
     
@@ -121,7 +131,7 @@ class PollCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "12"
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = UIColor.red
+        label.backgroundColor = UIColor.white
         return label
     }()
     
@@ -132,7 +142,7 @@ class PollCell: UICollectionViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
-        imageView.backgroundColor = UIColor.blue
+        imageView.backgroundColor = UIColor.white
         return imageView
     }()
     
@@ -140,7 +150,7 @@ class PollCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "30"
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = UIColor.green
+        label.backgroundColor = UIColor.white
         return label
     }()
     
@@ -209,11 +219,22 @@ class PollCell: UICollectionViewCell {
     
     func setupViews() {
         // do stuff
-        addSubview(questionView)
-        addSubview(separatorView)
-        addSubview(coinView)
-        addSubview(timeView)
-        addSubview(voteView)
+//        addSubview(questionView)
+//        addSubview(separatorView)
+//        addSubview(coinView)
+//        addSubview(timeView)
+//        addSubview(voteView)
+//        
+        holderView.addSubview(questionView)
+        //holderView.addSubview(separatorView)
+        holderView.addSubview(coinView)
+        holderView.addSubview(timeView)
+        holderView.addSubview(voteView)
+        
+        addSubview(holderView)
+        
+        addConstraintsWithFormat(format: "H:|-5-[v0]-5-|", views: holderView)
+        addConstraintsWithFormat(format: "V:|-5-[v0]-5-|", views: holderView)
         
         
         
@@ -225,18 +246,19 @@ class PollCell: UICollectionViewCell {
         // coin horizontal constraint
         let coinHeightConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|-16-[v0(==v1)]-8-[v1(==v0)]-8-[v2(==v0)]-16-|", options: [], metrics: nil, views: ["v0": coinView, "v1": timeView, "v2": voteView])
         allConstraints += coinHeightConstraint
-        
-        let verticalConstraint = NSLayoutConstraint.constraints(withVisualFormat: "V:|-16-[v0]-8-[v2(40)]-16-[v1(1)]|", options: [], metrics: nil, views: ["v0": questionView, "v1": separatorView, "v2": coinView])
+
+        // this is the old separator
+        let verticalConstraint = NSLayoutConstraint.constraints(withVisualFormat: "V:|-16-[v0]-8-[v2(40)]-16-|", options: [], metrics: nil, views: ["v0": questionView, "v2": coinView])
         allConstraints += verticalConstraint
         
-        let verticalConstraint2 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-16-[v0]-8-[v2(40)]-16-[v1(1)]|", options: [], metrics: nil, views: ["v0": questionView, "v1": separatorView, "v2": timeView])
+        let verticalConstraint2 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-16-[v0]-8-[v2(40)]-16-|", options: [], metrics: nil, views: ["v0": questionView, "v2": timeView])
         allConstraints += verticalConstraint2
         
-        let verticalConstraint3 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-16-[v0]-8-[v2(40)]-16-[v1(1)]|", options: [], metrics: nil, views: ["v0": questionView, "v1": separatorView, "v2": voteView])
+        let verticalConstraint3 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-16-[v0]-8-[v2(40)]-16-|", options: [], metrics: nil, views: ["v0": questionView, "v2": voteView])
         allConstraints += verticalConstraint3
         
-        let separatorHeightConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: [], metrics: nil, views: ["v0": separatorView])
-        allConstraints += separatorHeightConstraint
+//        let separatorHeightConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: [], metrics: nil, views: ["v0": separatorView])
+//        allConstraints += separatorHeightConstraint
         
         NSLayoutConstraint.activate(allConstraints)
     }
