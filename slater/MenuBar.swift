@@ -14,7 +14,7 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.backgroundColor = UIColor(red: 18/255, green: 20/255, blue: 32/255, alpha: 1)
+        cv.backgroundColor = ColorConstants.menubarColor
         cv.dataSource = self
         cv.delegate = self
         return cv

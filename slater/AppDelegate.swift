@@ -28,12 +28,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         
-        UINavigationBar.appearance().barTintColor = UIColor(red: 18/255, green: 20/255, blue: 32/255, alpha: 1)
-        
+        UINavigationBar.appearance().barTintColor = ColorConstants.menubarColor
         application.statusBarStyle = .lightContent // change font color of ios icons at top
         
         let statusBarBackgroundView = UIView()
-        statusBarBackgroundView.backgroundColor = UIColor(red: 18/255, green: 20/255, blue: 32/255, alpha: 1)
+        statusBarBackgroundView.backgroundColor = ColorConstants.menubarColor
         statusBarBackgroundView.translatesAutoresizingMaskIntoConstraints = false
         
         window?.addSubview(statusBarBackgroundView)

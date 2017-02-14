@@ -14,7 +14,7 @@ class LeaderboardCell: BaseCell, UICollectionViewDataSource, UICollectionViewDel
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
         cv.translatesAutoresizingMaskIntoConstraints = false
-        cv.backgroundColor = UIColor.green
+        cv.backgroundColor = ColorConstants.appBackgroundColor
         cv.dataSource = self
         cv.delegate = self
         return cv
@@ -37,7 +37,6 @@ class LeaderboardCell: BaseCell, UICollectionViewDataSource, UICollectionViewDel
         super.setupViews()
         fetchUsers()
         
-        print("bam")
         addSubview(leaderboardCollection)
         
         addConstraintsWithFormat(format: "H:|[v0]|", views: leaderboardCollection)
@@ -55,11 +54,12 @@ class LeaderboardCell: BaseCell, UICollectionViewDataSource, UICollectionViewDel
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! LeaderboardCellItem
         
         cell.user = users?[indexPath.item]
+        cell.userLabel.text = "\(indexPath.item+1). " + cell.userLabel.text!
         return cell
     }
     
     func collectionView(_: UICollectionView, layout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: leaderboardCollection.frame.width, height: 75)
+        return CGSize(width: leaderboardCollection.frame.width, height: 50)
     }
     
     func collectionView(_: UICollectionView, layout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

@@ -133,7 +133,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         let redView = UIView()
         redView.translatesAutoresizingMaskIntoConstraints = false
-        redView.backgroundColor = UIColor(red: 18/255, green: 20/255, blue: 32/255, alpha: 1)
+        redView.backgroundColor = ColorConstants.menubarColor
         view.addSubview(redView)
         view.addConstraintsWithFormat(format: "H:|[v0]|", views: redView)
         view.addConstraintsWithFormat(format: "V:[v0(50)]", views: redView)

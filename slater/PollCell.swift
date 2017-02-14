@@ -83,6 +83,7 @@ class PollCell: UICollectionViewCell {
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = UIColor.white
         label.text = "Bulls or Cavaliers - 2/03/17"
+        label.layoutMargins = UIEdgeInsets(top: -5, left: 0, bottom: 0, right: 0)
         label.numberOfLines = 2
         return label
     }()
