@@ -29,6 +29,8 @@ class BaseCell: UICollectionViewCell {
 
 class PollCell: UICollectionViewCell {
     
+    weak var delegate: HomeControllerDelegate?
+    
     var poll: Poll? {
         didSet {
             questionLabel.text = poll?.title
@@ -50,6 +52,13 @@ class PollCell: UICollectionViewCell {
         setupCoinView()
         setupVoteView()
         setupViews()
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(PollCell.handleTap))
+        self.addGestureRecognizer(tap)
+    }
+    
+    func handleTap() {
+        delegate?.goToPollView(poll: self.poll!)
     }
     
     // sidebar view

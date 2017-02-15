@@ -8,7 +8,11 @@
 
 import UIKit
 
-class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+protocol HomeControllerDelegate: class {
+    func goToPollView(poll: Poll)
+}
+
+class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HomeControllerDelegate {
     
     lazy var menuBar: MenuBar = {
         let mb = MenuBar()
@@ -37,6 +41,12 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         setupCollectionView()
         setupMenuBar()
         setupNavBarButtons()
+    }
+    
+    // this sends us to the poll
+    func goToPollView(poll: Poll) {
+        let pollController = PollController(poll: poll)
+        navigationController?.pushViewController(pollController, animated: true)
     }
     
     func setupNavBarButtons() {
@@ -107,7 +117,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
             return leaderboardCell
         }
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! FeedCell
+        cell.delegate = self
         //let colors: [UIColor] = [.blue, .green, .gray, .purple]
         
         //cell.backgroundColor = colors[indexPath.item]

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2390801E1E52DE2F0070197A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2390801D1E52DE2F0070197A /* Constants.swift */; };
+		239080201E5428BE0070197A /* PollController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2390801F1E5428BE0070197A /* PollController.swift */; };
+		239080221E542EEB0070197A /* PollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239080211E542EEB0070197A /* PollView.swift */; };
 		239594621E3FE91F005B790D /* PollCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239594611E3FE91F005B790D /* PollCell.swift */; };
 		239594651E3FEAA7005B790D /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239594641E3FEAA7005B790D /* MenuBar.swift */; };
 		239594681E3FEF9F005B790D /* AddConstraints.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239594671E3FEF9F005B790D /* AddConstraints.swift */; };
@@ -32,6 +34,8 @@
 
 /* Begin PBXFileReference section */
 		2390801D1E52DE2F0070197A /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		2390801F1E5428BE0070197A /* PollController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollController.swift; sourceTree = "<group>"; };
+		239080211E542EEB0070197A /* PollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollView.swift; sourceTree = "<group>"; };
 		239594611E3FE91F005B790D /* PollCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollCell.swift; sourceTree = "<group>"; };
 		239594641E3FEAA7005B790D /* MenuBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
 		239594671E3FEF9F005B790D /* AddConstraints.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddConstraints.swift; sourceTree = "<group>"; };
@@ -77,6 +81,7 @@
 				23A7AEA11E4D3ED90083CA53 /* AccountCell.swift */,
 				23A7AEA31E4D60C90083CA53 /* LeaderboardCell.swift */,
 				23A7AEA71E4D65930083CA53 /* LeaderboardCellItem.swift */,
+				239080211E542EEB0070197A /* PollView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -87,6 +92,7 @@
 				23FBC4951E399D330097F43E /* HomeController.swift */,
 				239594731E4257BA005B790D /* LoginController.swift */,
 				239594751E4274B0005B790D /* MainNavigationController.swift */,
+				2390801F1E5428BE0070197A /* PollController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -225,8 +231,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				239080201E5428BE0070197A /* PollController.swift in Sources */,
 				23FBC4961E399D330097F43E /* HomeController.swift in Sources */,
 				23A7AEA41E4D60C90083CA53 /* LeaderboardCell.swift in Sources */,
+				239080221E542EEB0070197A /* PollView.swift in Sources */,
 				23FBC4941E399D330097F43E /* AppDelegate.swift in Sources */,
 				23A7AEA81E4D65930083CA53 /* LeaderboardCellItem.swift in Sources */,
 				239594651E3FEAA7005B790D /* MenuBar.swift in Sources */,

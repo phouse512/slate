@@ -17,6 +17,7 @@ class MainNavigationController: UINavigationController {
         if isLoggedIn() {
             let layout = UICollectionViewFlowLayout()
             let homeController = HomeController(collectionViewLayout: layout)
+            
             viewControllers = [homeController]
         } else {
             perform(#selector(showLoginController), with: nil, afterDelay: 0.01)
@@ -24,7 +25,7 @@ class MainNavigationController: UINavigationController {
     }
     
     fileprivate func isLoggedIn() -> Bool {
-        return false
+        return true
     }
     
     func showLoginController() {

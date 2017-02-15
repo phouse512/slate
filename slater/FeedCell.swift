@@ -10,6 +10,8 @@ import UIKit
 
 class FeedCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     
+    weak var delegate: HomeControllerDelegate?
+    
     lazy var collectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -55,6 +57,7 @@ class FeedCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate, 
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! PollCell
         cell.poll = polls?[indexPath.item]
         cell.sidebarView.backgroundColor = sidebarColors[indexPath.item % sidebarColors.count]
+        cell.delegate = self.delegate
         return cell
     }
     
