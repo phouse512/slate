@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		238BAE101E58C03B00AEAFDA /* AnswerCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238BAE0F1E58C03B00AEAFDA /* AnswerCollectionView.swift */; };
 		2390801E1E52DE2F0070197A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2390801D1E52DE2F0070197A /* Constants.swift */; };
 		239080201E5428BE0070197A /* PollController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2390801F1E5428BE0070197A /* PollController.swift */; };
 		239080221E542EEB0070197A /* PollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239080211E542EEB0070197A /* PollView.swift */; };
@@ -33,6 +34,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		238BAE0F1E58C03B00AEAFDA /* AnswerCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerCollectionView.swift; sourceTree = "<group>"; };
 		2390801D1E52DE2F0070197A /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		2390801F1E5428BE0070197A /* PollController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollController.swift; sourceTree = "<group>"; };
 		239080211E542EEB0070197A /* PollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollView.swift; sourceTree = "<group>"; };
@@ -71,9 +73,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		238BAE111E58CDFF00AEAFDA /* PollView */ = {
+			isa = PBXGroup;
+			children = (
+				238BAE0F1E58C03B00AEAFDA /* AnswerCollectionView.swift */,
+				239080211E542EEB0070197A /* PollView.swift */,
+			);
+			name = PollView;
+			sourceTree = "<group>";
+		};
 		239594601E3FE8CB005B790D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				238BAE111E58CDFF00AEAFDA /* PollView */,
 				239594611E3FE91F005B790D /* PollCell.swift */,
 				239594641E3FEAA7005B790D /* MenuBar.swift */,
 				239594711E4161A8005B790D /* FeedCell.swift */,
@@ -81,7 +93,6 @@
 				23A7AEA11E4D3ED90083CA53 /* AccountCell.swift */,
 				23A7AEA31E4D60C90083CA53 /* LeaderboardCell.swift */,
 				23A7AEA71E4D65930083CA53 /* LeaderboardCellItem.swift */,
-				239080211E542EEB0070197A /* PollView.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -243,6 +254,7 @@
 				239594621E3FE91F005B790D /* PollCell.swift in Sources */,
 				23A7AEA21E4D3ED90083CA53 /* AccountCell.swift in Sources */,
 				2395946B1E400FD5005B790D /* Poll.swift in Sources */,
+				238BAE101E58C03B00AEAFDA /* AnswerCollectionView.swift in Sources */,
 				2395946E1E4069F4005B790D /* ApiService.swift in Sources */,
 				239594681E3FEF9F005B790D /* AddConstraints.swift in Sources */,
 				239594701E407931005B790D /* RGB.swift in Sources */,

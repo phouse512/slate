@@ -229,7 +229,7 @@ class PollCell: UICollectionViewCell {
         let heightConstraint2 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]-8-|", options: [], metrics: nil, views: ["v0": coinLabel])
         coinConstraints += heightConstraint2
         
-        let horizontalConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0(15)]-4-[v1(30)]|", options: [], metrics: nil, views: ["v0": coinImage, "v1": coinLabel])
+        let horizontalConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0(15)]-4-[v1]|", options: [], metrics: nil, views: ["v0": coinImage, "v1": coinLabel])
         coinConstraints += horizontalConstraint
         
         NSLayoutConstraint.activate(coinConstraints)
