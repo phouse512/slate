@@ -41,7 +41,6 @@ class FeedCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate, 
         super.setupViews()
         fetchPolls()
         
-        
         addSubview(collectionView)
         addConstraintsWithFormat(format: "H:|[v0]|", views: collectionView)
         addConstraintsWithFormat(format: "V:|[v0]|", views: collectionView)

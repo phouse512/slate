@@ -14,5 +14,11 @@ class Poll: NSObject {
     var buyIn: Int?
     var currentVoteCount: Int?
     var closeTime: NSDate?
+    var answers: [Answer] = []
+}
+
+class Answer: NSObject {
     
+    var id: Int?
+    var text: String?
 }

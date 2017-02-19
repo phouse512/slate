@@ -30,9 +30,19 @@ class ApiService: NSObject {
             do {
                 let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
                 var polls = [Poll]() // need to instantiate this as a new array since it's by default optional
+                //print(json)
                 
                 for dictionary in json as! [[String: AnyObject]] {
                     let poll = Poll()
+                    
+                    for answers_dict in dictionary["answers"] as! [[String: AnyObject]] {
+                        let answer = Answer()
+                        answer.id = answers_dict["id"] as! Int?
+                        answer.text = answers_dict["text"] as! String?
+                        
+                        poll.answers.append(answer)
+                    }
+                    
                     poll.buyIn = dictionary["buy_in"] as! Int?
                     poll.currentVoteCount = dictionary["current_votes"] as! Int?
                     poll.title = dictionary["question"] as! String?

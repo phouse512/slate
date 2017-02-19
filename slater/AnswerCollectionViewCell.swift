@@ -10,12 +10,19 @@ import UIKit
 
 class AnswerCollectionViewCell: BaseCell {
     
+    var answer: Answer? {
+        didSet {
+            answerLabel.text = answer?.text
+        }
+    }
+    
     let answerLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "Cleveland Cavaliers"
         label.numberOfLines = 2
-        label.backgroundColor = UIColor.red
+        label.backgroundColor = UIColor.white
+        label.font = UIFont(name: "HelveticaNeue-Bold", size: 20.0)
         return label
     }()
     
@@ -23,28 +30,23 @@ class AnswerCollectionViewCell: BaseCell {
         let icon = UIView()
         icon.translatesAutoresizingMaskIntoConstraints = false
         icon.layer.borderWidth = 2
-        icon.layer.cornerRadius = 4
+        icon.layer.cornerRadius = 7
         icon.layer.borderColor = UIColor.blue.cgColor
-        icon.backgroundColor = UIColor.green
+        icon.backgroundColor = UIColor.white
         return icon
     }()
+
     
-    let square: SquareUI = {
-        let square = SquareUI()
-        square.translatesAutoresizingMaskIntoConstraints = false
-        square.backgroundColor = UIColor.green
-        return square
-    }()
-    
-    override var isHighlighted: Bool {
-        didSet {
-            answerLabel.backgroundColor = isHighlighted ? UIColor.green : UIColor.white
-        }
-    }
+//    override var isHighlighted: Bool {
+//        didSet {
+//            answerLabel.backgroundColor = isHighlighted ? UIColor.green : UIColor.white
+//        }
+//    }
     
     override var isSelected: Bool {
         didSet {
-            answerLabel.backgroundColor = isSelected ? UIColor.brown : UIColor.orange
+            self.layer.borderWidth = isSelected ? 4 : 0
+            self.layer.borderColor = icon.layer.borderColor
         }
     }
     
@@ -62,12 +64,10 @@ class AnswerCollectionViewCell: BaseCell {
         addSubview(answerLabel)
         addSubview(icon)
         
-        addConstraintsWithFormat(format: "H:|-5-[v0]", views: answerLabel)
-        addConstraintsWithFormat(format: "H:[v0(20)]-5-|", views: icon)
+        addConstraintsWithFormat(format: "H:|-10-[v0]", views: answerLabel)
+        addConstraintsWithFormat(format: "H:[v0(20)]-10-|", views: icon)
         addConstraintsWithFormat(format: "V:|-5-[v0]-5-|", views: answerLabel)
-        addConstraintsWithFormat(format: "V:|-5-[v0(20)]", views: icon)
-        
-        
+        addConstraintsWithFormat(format: "V:|-10-[v0(20)]", views: icon)
     }
 }
 

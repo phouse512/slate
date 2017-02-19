@@ -12,7 +12,17 @@ class PollView: UIView {
     
     weak var delegate: LoginControllerDelegate?
     
-    var poll: Poll?
+    var poll: Poll? {
+        didSet {
+            answerCollectionView.answers = poll?.answers
+            questionLabel.text = poll?.title
+            
+            if let votes = poll?.currentVoteCount {
+                votesView.text = "\(votes) votes"
+            }
+            
+        }
+    }
     
     lazy var answerCollectionView: AnswerCollectionView = {
         let cv = AnswerCollectionView()
@@ -24,7 +34,7 @@ class PollView: UIView {
         let view = UIView()
         view.backgroundColor = UIColor.white
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.layer.cornerRadius = 8
+        //view.layer.cornerRadius = 8
         view.layer.masksToBounds = true
         return view
     }()
@@ -79,22 +89,11 @@ class PollView: UIView {
         return view
     }()
     
-//    lazy var answerCollectionView: UICollectionView = {
-//        let layout = UICollectionViewFlowLayout()
-//        let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-//        cv.translatesAutoresizingMaskIntoConstraints = false
-//        cv.backgroundColor = UIColor.orange
-//        cv.dataSource = self
-//        cv.delegate = self
-//        return cv
-//    }()
     
     let cellId = "cellId"
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-//        answerCollectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
 
         setupViews()
         setupTitleView()
@@ -106,7 +105,7 @@ class PollView: UIView {
         addSubview(titleView)
         addSubview(answerView)
         
-        addConstraintsWithFormat(format: "H:|-5-[v0]-5-|", views: titleView)
+        addConstraintsWithFormat(format: "H:|[v0]|", views: titleView)
         addConstraintsWithFormat(format: "H:|[v0]|", views: answerView)
         
         addConstraintsWithFormat(format: "V:|-5-[v0(150)]-10-[v1]|", views: titleView, answerView)

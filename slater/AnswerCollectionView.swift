@@ -22,6 +22,12 @@ class AnswerCollectionView: UIView, UICollectionViewDataSource, UICollectionView
         return cv
     }()
     
+    var answers: [Answer]? {
+        didSet {
+            self.collectionView.reloadData()
+        }
+    }
+    
     let cellId = "cellId"
     
     override init(frame: CGRect) {
@@ -39,13 +45,13 @@ class AnswerCollectionView: UIView, UICollectionViewDataSource, UICollectionView
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return answers?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! AnswerCollectionViewCell
-        //cell.backgroundColor = UIColor.brown
-        cell.answerLabel.text = "BOMB"
+        cell.icon.layer.borderColor = ColorConstants.colorArray[indexPath.item % ColorConstants.colorArray.count].cgColor
+        cell.answer = answers?[indexPath.item]
         return cell
     }
     
