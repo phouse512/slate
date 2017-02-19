@@ -9,7 +9,7 @@
 import UIKit
 
 protocol HomeControllerDelegate: class {
-    func goToPollView(poll: Poll)
+    func goToPollView(poll: Poll, sidebarColor: UIColor)
 }
 
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HomeControllerDelegate {
@@ -44,8 +44,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     // this sends us to the poll
-    func goToPollView(poll: Poll) {
-        let pollController = PollController(poll: poll)
+    func goToPollView(poll: Poll, sidebarColor: UIColor) {
+        let pollController = PollController(poll: poll, sidebarColor: sidebarColor)
         navigationController?.pushViewController(pollController, animated: true)
     }
     

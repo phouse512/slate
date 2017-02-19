@@ -21,6 +21,9 @@ class PollView: UIView {
                 votesView.text = "\(votes) votes"
             }
             
+            if let buyIn = poll?.buyIn {
+                coinView.coinLabel.text = "\(buyIn)"
+            }
         }
     }
     
@@ -34,7 +37,6 @@ class PollView: UIView {
         let view = UIView()
         view.backgroundColor = UIColor.white
         view.translatesAutoresizingMaskIntoConstraints = false
-        //view.layer.cornerRadius = 8
         view.layer.masksToBounds = true
         return view
     }()
@@ -47,8 +49,6 @@ class PollView: UIView {
         text.textColor = UIColor.darkGray
         return text
     }()
-    
-    
     
     let votesView : UILabel = {
         let text = UILabel()
@@ -63,6 +63,13 @@ class PollView: UIView {
     let questionView : UIView = {
         let view = UIView()
         view.backgroundColor = UIColor.white
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    let coinView : CoinView = {
+        let view = CoinView()
+        view.coinLabel.textColor = UIColor.darkGray
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -117,13 +124,17 @@ class PollView: UIView {
         titleView.addSubview(questionView)
         titleView.addSubview(timeView)
         titleView.addSubview(votesView)
+        titleView.addSubview(coinView)
         
         addConstraintsWithFormat(format: "V:|[v0(100)]-5-[v1]|", views: questionView, votesView)
         addConstraintsWithFormat(format: "V:|[v0(100)]-5-[v1]|", views: questionView, timeView)
+        addConstraintsWithFormat(format: "V:|[v0(100)]-5-[v1]|", views: questionView, coinView)
         
         addConstraintsWithFormat(format: "H:|-5-[v0]|", views: questionView)
-        addConstraintsWithFormat(format: "H:|-5-[v0(100)]", views: timeView)
-        addConstraintsWithFormat(format: "H:[v0(100)]-5-|", views: votesView)
+//        addConstraintsWithFormat(format: "H:|-5-[v0(100)]", views: timeView)
+//        addConstraintsWithFormat(format: "H:[v0(100)]-5-|", views: votesView)
+        
+        addConstraintsWithFormat(format: "H:|-5-[v0(==v1)]-8-[v1(==v0)]-8-[v2(==v0)]-5-|", views: coinView, timeView, votesView)
     }
     
     func setupQuestionView() {

@@ -57,7 +57,7 @@ class PollCell: UICollectionViewCell {
     }
     
     func handleTap() {
-        delegate?.goToPollView(poll: self.poll!)
+        delegate?.goToPollView(poll: self.poll!, sidebarColor: sidebarView.backgroundColor ?? UIColor.blue)
     }
     
     // sidebar view

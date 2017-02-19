@@ -12,6 +12,7 @@ import UIKit
 class PollController: UIViewController {
     
     var poll: Poll?
+    var sidebarColor: UIColor
     
     lazy var pollView: PollView = {
         let view = PollView()
@@ -23,7 +24,6 @@ class PollController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupPollView()
-        print(poll ?? "not here")
         pollView.poll = poll
         
     }
@@ -36,9 +36,12 @@ class PollController: UIViewController {
     }
 
     
-    init(poll: Poll?) {
+    init(poll: Poll?, sidebarColor: UIColor) {
         self.poll = poll
+        self.sidebarColor = sidebarColor
         super.init(nibName: nil, bundle: nil)
+        
+        pollView.sidebar.backgroundColor = sidebarColor
     }
     
     required init?(coder aDecoder: NSCoder) {
