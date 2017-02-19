@@ -80,7 +80,7 @@ class ApiService: NSObject {
                 var users = [User]()
                 for dictionary in json as! [[String: AnyObject]] {
                     let user = User()
-                    user.balance = dictionary["buy_in"] as! Int?
+                    user.balance = dictionary["balance"] as! Int?
                     user.username = dictionary["username"] as! String?
                     users.append(user)
                 }

@@ -50,7 +50,7 @@ class MenuBar: UIView, UICollectionViewDataSource, UICollectionViewDelegate, UIC
     // this code sets up the little white highlight bar underneath menubar icons
     func setupHorizontalBar() {
         let horizontalBarView = UIView()
-        horizontalBarView.backgroundColor = UIColor(red: 83/255, green: 90/255, blue: 116/255, alpha: 1)
+        horizontalBarView.backgroundColor = UIColor.white
         horizontalBarView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(horizontalBarView)
         

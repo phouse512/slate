@@ -140,7 +140,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
 
     private func setupMenuBar() {
-        navigationController?.hidesBarsOnSwipe = true
+        // this toggles whether or not you can 'scroll up' the top menu bar to shorten it and hide text
+        navigationController?.hidesBarsOnSwipe = false
         
         let redView = UIView()
         redView.translatesAutoresizingMaskIntoConstraints = false

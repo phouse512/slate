@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		238BAE101E58C03B00AEAFDA /* AnswerCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238BAE0F1E58C03B00AEAFDA /* AnswerCollectionView.swift */; };
 		238BAE131E58F98900AEAFDA /* AnswerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238BAE121E58F98900AEAFDA /* AnswerCollectionViewCell.swift */; };
+		238BAE161E59802000AEAFDA /* CoinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238BAE151E59802000AEAFDA /* CoinView.swift */; };
 		2390801E1E52DE2F0070197A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2390801D1E52DE2F0070197A /* Constants.swift */; };
 		239080201E5428BE0070197A /* PollController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2390801F1E5428BE0070197A /* PollController.swift */; };
 		239080221E542EEB0070197A /* PollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239080211E542EEB0070197A /* PollView.swift */; };
@@ -37,6 +38,7 @@
 /* Begin PBXFileReference section */
 		238BAE0F1E58C03B00AEAFDA /* AnswerCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerCollectionView.swift; sourceTree = "<group>"; };
 		238BAE121E58F98900AEAFDA /* AnswerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerCollectionViewCell.swift; sourceTree = "<group>"; };
+		238BAE151E59802000AEAFDA /* CoinView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoinView.swift; sourceTree = "<group>"; };
 		2390801D1E52DE2F0070197A /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		2390801F1E5428BE0070197A /* PollController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollController.swift; sourceTree = "<group>"; };
 		239080211E542EEB0070197A /* PollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PollView.swift; sourceTree = "<group>"; };
@@ -85,9 +87,18 @@
 			name = PollView;
 			sourceTree = "<group>";
 		};
+		238BAE141E597FCD00AEAFDA /* GenericViews */ = {
+			isa = PBXGroup;
+			children = (
+				238BAE151E59802000AEAFDA /* CoinView.swift */,
+			);
+			name = GenericViews;
+			sourceTree = "<group>";
+		};
 		239594601E3FE8CB005B790D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				238BAE141E597FCD00AEAFDA /* GenericViews */,
 				238BAE111E58CDFF00AEAFDA /* PollView */,
 				239594611E3FE91F005B790D /* PollCell.swift */,
 				239594641E3FEAA7005B790D /* MenuBar.swift */,
@@ -254,6 +265,7 @@
 				239594651E3FEAA7005B790D /* MenuBar.swift in Sources */,
 				23A7AEA61E4D64AE0083CA53 /* User.swift in Sources */,
 				239594761E4274B0005B790D /* MainNavigationController.swift in Sources */,
+				238BAE161E59802000AEAFDA /* CoinView.swift in Sources */,
 				239594621E3FE91F005B790D /* PollCell.swift in Sources */,
 				23A7AEA21E4D3ED90083CA53 /* AccountCell.swift in Sources */,
 				2395946B1E400FD5005B790D /* Poll.swift in Sources */,

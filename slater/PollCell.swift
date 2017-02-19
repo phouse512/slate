@@ -36,7 +36,7 @@ class PollCell: UICollectionViewCell {
             questionLabel.text = poll?.title
             
             if let buyIn = poll?.buyIn {
-                coinLabel.text = "\(buyIn)"
+                coinUIView.coinLabel.text = "\(buyIn)"
             }
             
             if let votes = poll?.currentVoteCount {
@@ -49,7 +49,6 @@ class PollCell: UICollectionViewCell {
         super.init(frame: frame)
         setupQuestionView()
         setupTimeView()
-        setupCoinView()
         setupVoteView()
         setupViews()
         
@@ -103,14 +102,7 @@ class PollCell: UICollectionViewCell {
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
-    
-    let coinView: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor.white
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
+
     // time view details
     let timeView: UIView = {
         let view = UIView()
@@ -153,23 +145,10 @@ class PollCell: UICollectionViewCell {
         return label
     }()
     
-    // Coin Stuff
-    let coinImage: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "coin")
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        imageView.contentMode = .scaleAspectFit
-        imageView.clipsToBounds = true
-        imageView.backgroundColor = UIColor.white
-        return imageView
-    }()
-    
-    let coinLabel: UILabel = {
-        let label = UILabel()
-        label.text = "30"
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = UIColor.white
-        return label
+    let coinUIView: CoinView = {
+        let view = CoinView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     func setupQuestionView() {
@@ -217,35 +196,10 @@ class PollCell: UICollectionViewCell {
         NSLayoutConstraint.activate(voteConstraints)
     }
     
-    func setupCoinView() {
-        coinView.addSubview(coinImage)
-        coinView.addSubview(coinLabel)
-        
-        var coinConstraints = [NSLayoutConstraint]()
-        
-        let heightConstraint = NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]-8-|", options: [], metrics: nil, views: ["v0": coinImage])
-        coinConstraints += heightConstraint
-        
-        let heightConstraint2 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]-8-|", options: [], metrics: nil, views: ["v0": coinLabel])
-        coinConstraints += heightConstraint2
-        
-        let horizontalConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0(15)]-4-[v1]|", options: [], metrics: nil, views: ["v0": coinImage, "v1": coinLabel])
-        coinConstraints += horizontalConstraint
-        
-        NSLayoutConstraint.activate(coinConstraints)
-    }
-    
     func setupViews() {
-        // do stuff
-//        addSubview(questionView)
-//        addSubview(separatorView)
-//        addSubview(coinView)
-//        addSubview(timeView)
-//        addSubview(voteView)
-//        
+
         holderView.addSubview(questionView)
-        //holderView.addSubview(separatorView)
-        holderView.addSubview(coinView)
+        holderView.addSubview(coinUIView)
         holderView.addSubview(timeView)
         holderView.addSubview(voteView)
         holderView.addSubview(sidebarView)
@@ -254,24 +208,18 @@ class PollCell: UICollectionViewCell {
         
         addConstraintsWithFormat(format: "H:|-10-[v0]-10-|", views: holderView)
         addConstraintsWithFormat(format: "V:|-5-[v0]-5-|", views: holderView)
-        
-        
-        
         addConstraintsWithFormat(format: "V:|[v0]|", views: sidebarView)
         
-        
-        
         var allConstraints = [NSLayoutConstraint]()
-        
         let heightConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|[v1(8)]-8-[v0]-4-|", options: [], metrics: nil, views: ["v1": sidebarView, "v0": questionView])
         allConstraints += heightConstraint
         
         // coin horizontal constraint
-        let coinHeightConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|[v3(8)]-8-[v0(==v1)]-8-[v1(==v0)]-8-[v2(==v0)]-4-|", options: [], metrics: nil, views: ["v0": coinView, "v1": timeView, "v2": voteView, "v3": sidebarView])
+        let coinHeightConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|[v3(8)]-8-[v0(==v1)]-8-[v1(==v0)]-8-[v2(==v0)]-4-|", options: [], metrics: nil, views: ["v0": coinUIView, "v1": timeView, "v2": voteView, "v3": sidebarView])
         allConstraints += coinHeightConstraint
 
         // this is the old separator
-        let verticalConstraint = NSLayoutConstraint.constraints(withVisualFormat: "V:|-4-[v0]-8-[v2(40)]-4-|", options: [], metrics: nil, views: ["v0": questionView, "v2": coinView])
+        let verticalConstraint = NSLayoutConstraint.constraints(withVisualFormat: "V:|-4-[v0]-8-[v2(40)]-4-|", options: [], metrics: nil, views: ["v0": questionView, "v2": coinUIView])
         allConstraints += verticalConstraint
         
         let verticalConstraint2 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-4-[v0]-8-[v2(40)]-4-|", options: [], metrics: nil, views: ["v0": questionView, "v2": timeView])
@@ -279,9 +227,6 @@ class PollCell: UICollectionViewCell {
         
         let verticalConstraint3 = NSLayoutConstraint.constraints(withVisualFormat: "V:|-4-[v0]-8-[v2(40)]-4-|", options: [], metrics: nil, views: ["v0": questionView, "v2": voteView])
         allConstraints += verticalConstraint3
-        
-//        let separatorHeightConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|[v0]|", options: [], metrics: nil, views: ["v0": separatorView])
-//        allConstraints += separatorHeightConstraint
         
         NSLayoutConstraint.activate(allConstraints)
     }

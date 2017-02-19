@@ -48,10 +48,12 @@ class PollView: UIView {
         return text
     }()
     
+    
+    
     let votesView : UILabel = {
         let text = UILabel()
         text.backgroundColor = UIColor.white
-        text.translatesAutoresizingMaskIntoConstraints = false
+        text.translatesAutoresizingMaskIntoConstraints = false 
         text.textAlignment = NSTextAlignment.right
         text.textColor = UIColor.darkGray
         text.text = "430 votes"
