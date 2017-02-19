@@ -94,4 +94,33 @@ class ApiService: NSObject {
             
         }.resume()
     }
+    
+    func makeBet(pollId: Int, userId: Int, completion: @escaping(Bool) -> ()) {
+    
+        let url = URL(string: baseUrl + "bet")
+        var request = URLRequest(url: url!)
+        request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            
+            if error != nil {
+                print(error!)
+                return
+            }
+            
+            do {
+                let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
+                print(json)
+                
+                let result = true
+                
+                DispatchQueue.main.async {
+                    completion(result)
+                }
+            } catch let jsonError {
+                print(jsonError)
+            }
+            
+        }.resume()
+    }
 }

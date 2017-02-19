@@ -98,6 +98,33 @@ class PollView: UIView {
         return view
     }()
     
+    lazy var voteButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.backgroundColor = ColorConstants.betButtonColor
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Make Bet", for: .normal)
+        button.setTitleColor(.white, for: .normal)
+        button.addTarget(self, action: #selector(handleBet), for: .touchUpInside)
+        return button
+    }()
+    
+    let footerView : FooterView = {
+        let view = FooterView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor.red
+        return view
+    }()
+    
+    func handleBet() {
+        print("bet made")
+        voteButton.isEnabled = false
+        voteButton.backgroundColor = UIColor.gray
+        ApiService.sharedInstance.makeBet(pollId: 1, userId: 2, completion: { (result: Bool) in
+            print(result)
+            self.voteButton.isEnabled = true
+            self.voteButton.backgroundColor = ColorConstants.betButtonColor
+        })
+    }
     
     let cellId = "cellId"
     
@@ -113,11 +140,16 @@ class PollView: UIView {
     func setupViews() {
         addSubview(titleView)
         addSubview(answerView)
+        addSubview(voteButton)
+        addSubview(footerView)
         
         addConstraintsWithFormat(format: "H:|[v0]|", views: titleView)
         addConstraintsWithFormat(format: "H:|[v0]|", views: answerView)
+        addConstraintsWithFormat(format: "H:|[v0]|", views: voteButton)
+        addConstraintsWithFormat(format: "H:|[v0]|", views: footerView)
         
         addConstraintsWithFormat(format: "V:|-5-[v0(150)]-10-[v1]|", views: titleView, answerView)
+        addConstraintsWithFormat(format: "V:[v0(60)]-10-[v1(60)]|", views: voteButton, footerView)
     }
     
     func setupTitleView() {
