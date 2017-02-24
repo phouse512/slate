@@ -16,7 +16,7 @@ class CoinView: UIView {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
-        imageView.backgroundColor = UIColor.white
+        imageView.backgroundColor = UIColor.clear
         return imageView
     }()
     
@@ -24,7 +24,7 @@ class CoinView: UIView {
         let label = UILabel()
         label.text = "30"
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = UIColor.white
+        label.backgroundColor = UIColor.clear
         return label
     }()
     

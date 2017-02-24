@@ -23,6 +23,7 @@ class PollView: UIView {
             
             if let buyIn = poll?.buyIn {
                 coinView.coinLabel.text = "\(buyIn)"
+                footerView.coin = buyIn
             }
         }
     }

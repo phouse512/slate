@@ -10,6 +10,14 @@ import UIKit
 
 class FooterView: UIView {
     
+    var coin : Int? {
+        didSet {
+            if let coin = coin {
+                coinView.coinLabel.text = "\(coin)"
+            }
+        }
+    }
+    
     let leftView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -27,18 +35,29 @@ class FooterView: UIView {
     let rightView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
-        view.backgroundColor = ColorConstants.colorArray[2]
+//        view.backgroundColor = ColorConstants.colorArray[2]
+        view.backgroundColor = UIColor.white
+        view.layer.borderWidth = 1
+        view.layer.borderColor = UIColor.darkGray.cgColor
         return view
     }()
     
+    
+    // right label setup
     let balanceLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = UIColor.green
+        label.backgroundColor = UIColor.clear
         label.text = "Balance"
         label.font = UIFont(name: "HelveticaNeue", size: 12.0)
         label.textAlignment = NSTextAlignment.right
         return label
+    }()
+    
+    let coinView: CoinView = {
+        let view = CoinView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
     }()
     
     override init(frame: CGRect) {
@@ -61,9 +80,12 @@ class FooterView: UIView {
     
     func setupRightView() {
         rightView.addSubview(balanceLabel)
+        rightView.addSubview(coinView)
         
         addConstraintsWithFormat(format: "H:|[v0]|", views: balanceLabel)
-        addConstraintsWithFormat(format: "V:|-5-[v0(15)]", views: balanceLabel)
+        addConstraintsWithFormat(format: "H:[v0(40)]-4-|", views: coinView)
+        addConstraintsWithFormat(format: "V:|-5-[v0(15)]-5-[v1(40)]", views: balanceLabel, coinView)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

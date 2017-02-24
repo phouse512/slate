@@ -23,6 +23,24 @@ class PollController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        // add coinView to to navbar
+        let coinView = CoinView()
+        coinView.coinLabel.textColor = UIColor.white
+        coinView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let navView = UIView()
+        navView.translatesAutoresizingMaskIntoConstraints = false
+        navView.addSubview(coinView)
+        
+        navView.addConstraintsWithFormat(format: "H:[v0]-5-|", views: coinView)
+        navView.addConstraintsWithFormat(format: "V:|[v0]|", views: coinView)
+        // navigationItem.titleView = navView
+        
+        let barButtonItem = UIBarButtonItem(customView: navView)
+        navigationItem.rightBarButtonItem = barButtonItem
+        
         setupPollView()
         pollView.poll = poll
         

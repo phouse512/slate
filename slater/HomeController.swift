@@ -37,6 +37,24 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         titleLabel.font = UIFont.systemFont(ofSize: 20)
         navigationItem.titleView = titleLabel
         
+        
+        
+        // add coinView to to navbar
+        let coinView = CoinView()
+        coinView.coinLabel.textColor = UIColor.white
+        coinView.translatesAutoresizingMaskIntoConstraints = false
+        
+        let navView = UIView()
+        navView.translatesAutoresizingMaskIntoConstraints = false
+        navView.addSubview(coinView)
+        
+        navView.addConstraintsWithFormat(format: "H:[v0]-5-|", views: coinView)
+        navView.addConstraintsWithFormat(format: "V:|[v0]|", views: coinView)
+        // navigationItem.titleView = navView
+        
+        let barButtonItem = UIBarButtonItem(customView: navView)
+        navigationItem.rightBarButtonItem = barButtonItem
+        
 
         setupCollectionView()
         setupMenuBar()
