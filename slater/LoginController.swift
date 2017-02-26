@@ -9,7 +9,7 @@
 import UIKit
 
 protocol LoginControllerDelegate: class {
-    func finishLoggingIn()
+    func finishLoggingIn(username: String, password: String)
 }
 
 class LoginController: UICollectionViewController, UICollectionViewDelegateFlowLayout, LoginControllerDelegate {
@@ -65,11 +65,26 @@ class LoginController: UICollectionViewController, UICollectionViewDelegateFlowL
         return CGSize(width: view.frame.width, height: view.frame.height)
     }
     
-    func finishLoggingIn() {
-        let rootViewController = UIApplication.shared.keyWindow?.rootViewController
-        guard let mainNavigationController = rootViewController as? MainNavigationController else { return }
+    func finishLoggingIn(username: String, password: String) {
         
-        mainNavigationController.viewControllers = [HomeController(collectionViewLayout: UICollectionViewFlowLayout())]
-        dismiss(animated: true, completion: nil)
+        ApiService.sharedInstance.loginRequest(username: username, password: password, completion: { (result: Bool) in
+            print("request done")
+            
+            if result {
+                // successful login
+                let rootViewController = UIApplication.shared.keyWindow?.rootViewController
+                guard let mainNavigationController = rootViewController as? MainNavigationController else { return }
+                
+                mainNavigationController.viewControllers = [HomeController(collectionViewLayout: UICollectionViewFlowLayout())]
+                self.dismiss(animated: true, completion: nil)
+                // need to set auth token returned from server
+//                mainNavigationController.is
+            } else {
+                // login failz
+                let alert = UIAlertController(title: "Alert", message: "Login Failed", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "Click", style: .default, handler: nil))
+                self.present(alert, animated: true, completion: nil)
+            }
+        })
     }
 }

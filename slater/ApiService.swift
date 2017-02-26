@@ -156,10 +156,11 @@ class ApiService: NSObject {
             }
             
             do {
+                var result = true
                 if let httpStatus = response as? HTTPURLResponse {
                     if httpStatus.statusCode != 200 {
                         print("not working")
-                        return
+                        result = false
                     }
                 }
                 
@@ -167,7 +168,7 @@ class ApiService: NSObject {
                 print(json)
                 
                 DispatchQueue.main.async {
-                    completion(true)
+                    completion(result)
                 }
             } catch let jsonError {
                 print(jsonError)

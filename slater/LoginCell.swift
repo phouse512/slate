@@ -29,6 +29,7 @@ class LoginCell: UICollectionViewCell {
         textField.layer.borderWidth = 1
         textField.isSecureTextEntry = true
         textField.backgroundColor = .white
+        textField.keyboardType = .default
         return textField
     }()
     
@@ -42,11 +43,7 @@ class LoginCell: UICollectionViewCell {
     }()
     
     func handleLogin() {
-        print("yo")
-        //delegate?.finishLoggingIn()
-        ApiService.sharedInstance.loginRequest(username: "phouse512", password: "pmh12321", completion: { (result: Bool) in
-            print("request done")
-        })
+        delegate?.finishLoggingIn(username: userTextField.text!, password: passwordTextField.text!)
     }
     
     
