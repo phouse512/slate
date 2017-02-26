@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		232BB5E21E6373A10040C37E /* AuthResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 232BB5E11E6373A10040C37E /* AuthResponse.swift */; };
 		237465FE1E5A27C000C9E036 /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 237465FD1E5A27C000C9E036 /* FooterView.swift */; };
 		238BAE101E58C03B00AEAFDA /* AnswerCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238BAE0F1E58C03B00AEAFDA /* AnswerCollectionView.swift */; };
 		238BAE131E58F98900AEAFDA /* AnswerCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 238BAE121E58F98900AEAFDA /* AnswerCollectionViewCell.swift */; };
@@ -37,6 +38,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		232BB5E11E6373A10040C37E /* AuthResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthResponse.swift; sourceTree = "<group>"; };
 		237465FD1E5A27C000C9E036 /* FooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
 		238BAE0F1E58C03B00AEAFDA /* AnswerCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerCollectionView.swift; sourceTree = "<group>"; };
 		238BAE121E58F98900AEAFDA /* AnswerCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnswerCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -141,6 +143,7 @@
 			children = (
 				2395946A1E400FD5005B790D /* Poll.swift */,
 				23A7AEA51E4D64AE0083CA53 /* User.swift */,
+				232BB5E11E6373A10040C37E /* AuthResponse.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -262,6 +265,7 @@
 				239080201E5428BE0070197A /* PollController.swift in Sources */,
 				23FBC4961E399D330097F43E /* HomeController.swift in Sources */,
 				23A7AEA41E4D60C90083CA53 /* LeaderboardCell.swift in Sources */,
+				232BB5E21E6373A10040C37E /* AuthResponse.swift in Sources */,
 				239080221E542EEB0070197A /* PollView.swift in Sources */,
 				23FBC4941E399D330097F43E /* AppDelegate.swift in Sources */,
 				23A7AEA81E4D65930083CA53 /* LeaderboardCellItem.swift in Sources */,
