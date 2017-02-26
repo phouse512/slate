@@ -43,8 +43,13 @@ class LoginCell: UICollectionViewCell {
     
     func handleLogin() {
         print("yo")
-        delegate?.finishLoggingIn()
+        //delegate?.finishLoggingIn()
+        ApiService.sharedInstance.loginRequest(username: "phouse512", password: "pmh12321", completion: { (result: Bool) in
+            print("request done")
+        })
     }
+    
+    
     
     override init(frame: CGRect) {
         super.init(frame: frame)

@@ -21,6 +21,22 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return mb
     }()
     
+    var user: User? {
+        didSet {
+            if let balance = user?.balance {
+                let subview = navigationItem.rightBarButtonItem?.customView?.subviews[0] as! CoinView
+                subview.coinLabel.text = "\(balance)"
+            }
+        }
+    }
+    
+    func fetchUser() {
+        ApiService.sharedInstance.fetchUser(completion: { (user: User) in
+            self.user = user
+        })
+    }
+    
+    
     let cellId = "cellId"
     let accountCellId = "accountId"
     let leaderboardId = "leaderboardId"
@@ -52,10 +68,14 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         navView.addConstraintsWithFormat(format: "V:|[v0]|", views: coinView)
         // navigationItem.titleView = navView
         
-        let barButtonItem = UIBarButtonItem(customView: navView)
+        let barButtonItem = UIBarButtonItem()
+        barButtonItem.customView = navView
         navigationItem.rightBarButtonItem = barButtonItem
         
-
+        // update balance
+        fetchUser()
+        
+        
         setupCollectionView()
         setupMenuBar()
         setupNavBarButtons()

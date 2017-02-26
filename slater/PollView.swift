@@ -142,15 +142,15 @@ class PollView: UIView {
         addSubview(titleView)
         addSubview(answerView)
         addSubview(voteButton)
-        addSubview(footerView)
+//        addSubview(footerView)
         
         addConstraintsWithFormat(format: "H:|[v0]|", views: titleView)
         addConstraintsWithFormat(format: "H:|[v0]|", views: answerView)
         addConstraintsWithFormat(format: "H:|[v0]|", views: voteButton)
-        addConstraintsWithFormat(format: "H:|[v0]|", views: footerView)
+//        addConstraintsWithFormat(format: "H:|[v0]|", views: footerView)
         
         addConstraintsWithFormat(format: "V:|-5-[v0(150)]-10-[v1]|", views: titleView, answerView)
-        addConstraintsWithFormat(format: "V:[v0(60)]-10-[v1(60)]|", views: voteButton, footerView)
+        addConstraintsWithFormat(format: "V:[v0(60)]-10-|", views: voteButton)
     }
     
     func setupTitleView() {
@@ -158,6 +158,7 @@ class PollView: UIView {
         titleView.addSubview(timeView)
         titleView.addSubview(votesView)
         titleView.addSubview(coinView)
+        
         
         addConstraintsWithFormat(format: "V:|[v0(100)]-5-[v1]|", views: questionView, votesView)
         addConstraintsWithFormat(format: "V:|[v0(100)]-5-[v1]|", views: questionView, timeView)

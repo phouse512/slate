@@ -95,6 +95,86 @@ class ApiService: NSObject {
         }.resume()
     }
     
+    func fetchUser(completion: @escaping(User) -> ()) {
+        let url = URL(string: baseUrl + "user")
+        var request = URLRequest(url: url!)
+        request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            
+            if error != nil {
+                print(error!)
+                return
+            }
+            
+            do {
+                let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
+                let parsedData = json as! [String:Any]
+                print(json)
+                
+                let newUser = User()
+                newUser.balance = parsedData["balance"] as! Int?
+                newUser.username = parsedData["username"] as! String?
+                
+                DispatchQueue.main.async {
+                    completion(newUser)
+                }
+            } catch let jsonError {
+                print(jsonError)
+            }
+        }.resume()
+    }
+    
+    func loginRequest(username: String, password: String, completion: @escaping(Bool) -> ()) {
+        
+        let url = URL(string: baseUrl + "login")
+        var request = URLRequest(url: url!)
+        request.httpMethod = "POST"
+        
+        var dataBlob = [String:String]()
+        dataBlob["username"] = username + "hi"
+        dataBlob["pw"] = password
+        
+        do {
+            let data = try JSONSerialization.data(withJSONObject: dataBlob, options: .prettyPrinted)
+            //let decoded = try JSONSerialization.jsonObject(with: data, options: []) as! String
+            
+            request.httpBody = data
+            
+        } catch {
+            print(error.localizedDescription)
+            return
+        }
+        
+        //let paramString = "username=" + username + "&pw=" + password
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            
+            if error != nil {
+                print(error!)
+                return
+            }
+            
+            do {
+                if let httpStatus = response as? HTTPURLResponse {
+                    if httpStatus.statusCode != 200 {
+                        print("not working")
+                        return
+                    }
+                }
+                
+                let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
+                print(json)
+                
+                DispatchQueue.main.async {
+                    completion(true)
+                }
+            } catch let jsonError {
+                print(jsonError)
+            }
+        }.resume()
+    }
+    
     func makeBet(pollId: Int, userId: Int, completion: @escaping(Bool) -> ()) {
     
         let url = URL(string: baseUrl + "bet")

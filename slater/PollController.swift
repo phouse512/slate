@@ -21,6 +21,22 @@ class PollController: UIViewController {
         return view
     }()
     
+    var user: User? {
+        didSet {
+            if let balance = user?.balance {
+                let subview = navigationItem.rightBarButtonItem?.customView?.subviews[0] as! CoinView
+                subview.coinLabel.text = "\(balance)"
+            }
+        }
+    }
+    
+    func fetchUser() {
+        ApiService.sharedInstance.fetchUser(completion: { (user: User) in
+            self.user = user
+        })
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -40,6 +56,8 @@ class PollController: UIViewController {
         
         let barButtonItem = UIBarButtonItem(customView: navView)
         navigationItem.rightBarButtonItem = barButtonItem
+        
+        fetchUser()
         
         setupPollView()
         pollView.poll = poll
