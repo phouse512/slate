@@ -12,7 +12,7 @@ protocol HomeControllerDelegate: class {
     func goToPollView(poll: Poll, sidebarColor: UIColor)
 }
 
-class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HomeControllerDelegate {
+class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HomeControllerDelegate, LogoutDelegate {
     
     lazy var menuBar: MenuBar = {
         let mb = MenuBar()
@@ -102,6 +102,12 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         scrollToMenuIndex(menuIndex: 2)
     }
     
+    func finishLoggingOut() {
+        print("logging out")
+        UserDefaults.standard.removeObject(forKey: "session")
+        navigationController?.viewDidLoad()
+    }
+    
     func scrollToMenuIndex(menuIndex: Int) {
         let indexPath = NSIndexPath(item: menuIndex, section: 0)
         collectionView?.scrollToItem(at: indexPath as IndexPath, at: .centeredHorizontally, animated: true)
@@ -149,6 +155,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.item == 3 {
             let accountCell = collectionView.dequeueReusableCell(withReuseIdentifier: accountCellId, for: indexPath) as! AccountCell
+            accountCell.delegate = self
             return accountCell
         } else if indexPath.item == 1 {
             let leaderboardCell = collectionView.dequeueReusableCell(withReuseIdentifier: leaderboardId, for: indexPath) as! LeaderboardCell

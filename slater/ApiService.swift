@@ -125,7 +125,7 @@ class ApiService: NSObject {
         }.resume()
     }
     
-    func loginRequest(username: String, password: String, completion: @escaping(Bool) -> ()) {
+    func loginRequest(username: String, password: String, completion: @escaping(AuthResponse) -> ()) {
         
         let url = URL(string: baseUrl + "login")
         var request = URLRequest(url: url!)
@@ -150,25 +150,36 @@ class ApiService: NSObject {
         
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             
+            let authResponse = AuthResponse(valid: true)
+            
             if error != nil {
                 print(error!)
-                return
+                authResponse.valid = false
+                DispatchQueue.main.async {
+                    completion(authResponse)
+                }
             }
             
             do {
-                var result = true
                 if let httpStatus = response as? HTTPURLResponse {
                     if httpStatus.statusCode != 200 {
                         print("not working")
-                        result = false
+                        authResponse.valid = false
+                        
+                        DispatchQueue.main.async {
+                            completion(authResponse)
+                        }
+                        return
                     }
                 }
                 
                 let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
-                print(json)
+                let parsedData = json as! [String:Any]
+                print("garbage")
+                authResponse.authToken = parsedData["auth_token"] as! String?
                 
                 DispatchQueue.main.async {
-                    completion(result)
+                    completion(authResponse)
                 }
             } catch let jsonError {
                 print(jsonError)

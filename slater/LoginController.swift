@@ -12,6 +12,10 @@ protocol LoginControllerDelegate: class {
     func finishLoggingIn(username: String, password: String)
 }
 
+protocol LogoutDelegate: class {
+    func finishLoggingOut()
+}
+
 class LoginController: UICollectionViewController, UICollectionViewDelegateFlowLayout, LoginControllerDelegate {
     
     let cellId = "cellId"
@@ -67,13 +71,15 @@ class LoginController: UICollectionViewController, UICollectionViewDelegateFlowL
     
     func finishLoggingIn(username: String, password: String) {
         
-        ApiService.sharedInstance.loginRequest(username: username, password: password, completion: { (result: Bool) in
+        ApiService.sharedInstance.loginRequest(username: username, password: password, completion: { (result: AuthResponse) in
             print("request done")
             
-            if result {
+            if result.valid {
                 // successful login
                 let rootViewController = UIApplication.shared.keyWindow?.rootViewController
                 guard let mainNavigationController = rootViewController as? MainNavigationController else { return }
+                
+                UserDefaults.standard.set(result.authToken!, forKey: "session")
                 
                 mainNavigationController.viewControllers = [HomeController(collectionViewLayout: UICollectionViewFlowLayout())]
                 self.dismiss(animated: true, completion: nil)

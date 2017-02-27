@@ -25,7 +25,14 @@ class MainNavigationController: UINavigationController {
     }
     
     fileprivate func isLoggedIn() -> Bool {
-        return false
+        let status = UserDefaults.standard.object(forKey: "session")
+        
+        // TODO: check for expiring date in the future
+        if status != nil {
+            return true
+        } else {
+            return false
+        }
     }
     
     func showLoginController() {

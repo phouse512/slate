@@ -14,5 +14,9 @@ class AuthResponse: NSObject {
     var authToken: String?
     var createdAt: NSDate?
     var expiresAt: NSDate?
-
+    var valid: Bool
+    
+    init(valid: Bool) {
+        self.valid = valid
+    }
 }
