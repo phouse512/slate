@@ -19,6 +19,7 @@ class ApiService: NSObject {
         let url = URL(string: baseUrl + "polls")
         var request = URLRequest(url: url!)
         request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
+        request.setValue((UserDefaults.standard.object(forKey: "session") as! String), forHTTPHeaderField: "Authorization")
         
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             
@@ -43,6 +44,7 @@ class ApiService: NSObject {
                         poll.answers.append(answer)
                     }
                     
+                    poll.id = dictionary["id"] as! Int?
                     poll.buyIn = dictionary["buy_in"] as! Int?
                     poll.currentVoteCount = dictionary["current_votes"] as! Int?
                     poll.title = dictionary["question"] as! String?
@@ -61,11 +63,37 @@ class ApiService: NSObject {
         }.resume()
     }
     
+    func fetchPollBet(pollId: Int, completion: @escaping(Int) -> ()) {
+        let url = URL(string: baseUrl + "polls/\(pollId)/bet/")
+        var request = URLRequest(url: url!)
+        request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
+        request.setValue((UserDefaults.standard.object(forKey: "session") as! String), forHTTPHeaderField: "Authorization")
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            
+            if error != nil {
+                print(error!)
+                return
+            }
+            
+            do {
+                let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
+                let parsedData = json as! [String:Any]
+                
+                DispatchQueue.main.async {
+                    completion(parsedData["answer_id"] as! Int)
+                }
+            } catch let jsonError {
+                print(jsonError)
+            }
+        }.resume()
+    }
+    
     func fetchLeaders(completion: @escaping ([User]) -> ()) {
         let url = URL(string: baseUrl + "leaderboard")
         var request = URLRequest(url: url!)
         request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
-        
+        request.setValue((UserDefaults.standard.object(forKey: "session") as! String), forHTTPHeaderField: "Authorization")
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             
             if error != nil {
@@ -99,6 +127,7 @@ class ApiService: NSObject {
         let url = URL(string: baseUrl + "user")
         var request = URLRequest(url: url!)
         request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
+        request.setValue((UserDefaults.standard.object(forKey: "session") as! String), forHTTPHeaderField: "Authorization")
         
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             
@@ -130,9 +159,10 @@ class ApiService: NSObject {
         let url = URL(string: baseUrl + "login")
         var request = URLRequest(url: url!)
         request.httpMethod = "POST"
+        request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
         
         var dataBlob = [String:String]()
-        dataBlob["username"] = username + "hi"
+        dataBlob["username"] = username
         dataBlob["pw"] = password
         
         do {
@@ -175,8 +205,8 @@ class ApiService: NSObject {
                 
                 let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
                 let parsedData = json as! [String:Any]
-                print("garbage")
                 authResponse.authToken = parsedData["auth_token"] as! String?
+                print(parsedData)
                 
                 DispatchQueue.main.async {
                     completion(authResponse)
@@ -192,6 +222,7 @@ class ApiService: NSObject {
         let url = URL(string: baseUrl + "bet")
         var request = URLRequest(url: url!)
         request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
+        request.setValue((UserDefaults.standard.object(forKey: "session") as! String), forHTTPHeaderField: "Authorization")
         
         URLSession.shared.dataTask(with: request) { (data, response, error) in
             

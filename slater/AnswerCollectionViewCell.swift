@@ -64,7 +64,7 @@ class AnswerCollectionViewCell: BaseCell {
         addSubview(answerLabel)
         addSubview(icon)
         
-        addConstraintsWithFormat(format: "H:|-10-[v0]", views: answerLabel)
+        addConstraintsWithFormat(format: "H:|-10-[v0]-10-|", views: answerLabel)
         addConstraintsWithFormat(format: "H:[v0(20)]-10-|", views: icon)
         addConstraintsWithFormat(format: "V:|-5-[v0]-5-|", views: answerLabel)
         addConstraintsWithFormat(format: "V:|-10-[v0(20)]", views: icon)

@@ -24,13 +24,35 @@ class AnswerCollectionView: UIView, UICollectionViewDataSource, UICollectionView
     
     var answers: [Answer]? {
         didSet {
+            //self.answerMap = [Int:Int]()
             self.collectionView.reloadData()
         }
     }
     
+    var pollId: Int? {
+        didSet {
+            print(self.pollId ?? "no id")
+            self.collectionView.reloadData()
+            getCurrentlySelected()
+        }
+    }
+    
+    func getCurrentlySelected() {
+        ApiService.sharedInstance.fetchPollBet(pollId: self.pollId!, completion: { (result: Int) in
+            if let pollPosition = self.answerMap[result] {
+                let selectedIndex = NSIndexPath(item: pollPosition, section: 0)
+                self.collectionView.selectItem(at: selectedIndex as IndexPath, animated: true, scrollPosition: .top)
+            }
+        })
+    }
+    
+    var answerMap: [Int:Int]
+    
     let cellId = "cellId"
     
     override init(frame: CGRect) {
+        self.answerMap = [Int:Int]()
+        
         super.init(frame: frame)
         
         collectionView.register(AnswerCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
@@ -38,6 +60,8 @@ class AnswerCollectionView: UIView, UICollectionViewDataSource, UICollectionView
         addSubview(collectionView)
         addConstraintsWithFormat(format: "H:|[v0]|", views: collectionView)
         addConstraintsWithFormat(format: "V:|[v0]|", views: collectionView)
+        
+        //getCurrentlySelected()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -52,6 +76,9 @@ class AnswerCollectionView: UIView, UICollectionViewDataSource, UICollectionView
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! AnswerCollectionViewCell
         cell.icon.layer.borderColor = ColorConstants.colorArray[indexPath.item % ColorConstants.colorArray.count].cgColor
         cell.answer = answers?[indexPath.item]
+        let id = (answers?[indexPath.item].id)!
+        self.answerMap[id] = indexPath.item
+        //print(self.answerMap)
         return cell
     }
     

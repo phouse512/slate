@@ -10,6 +10,7 @@ import UIKit
 
 class Poll: NSObject {
     
+    var id: Int?
     var title: String?
     var buyIn: Int?
     var currentVoteCount: Int?

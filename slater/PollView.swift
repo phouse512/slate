@@ -15,6 +15,8 @@ class PollView: UIView {
     var poll: Poll? {
         didSet {
             answerCollectionView.answers = poll?.answers
+            answerCollectionView.pollId = poll?.id
+            print(answerCollectionView.pollId ?? 0)
             questionLabel.text = poll?.title
             
             if let votes = poll?.currentVoteCount {

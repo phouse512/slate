@@ -59,8 +59,8 @@ class PollController: UIViewController {
         
         fetchUser()
         
-        setupPollView()
         pollView.poll = poll
+        setupPollView()
         
     }
     
@@ -74,6 +74,7 @@ class PollController: UIViewController {
     
     init(poll: Poll?, sidebarColor: UIColor) {
         self.poll = poll
+        print(poll ?? "no_poll")
         self.sidebarColor = sidebarColor
         super.init(nibName: nil, bundle: nil)
         
