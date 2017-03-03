@@ -37,6 +37,8 @@ class AnswerCollectionView: UIView, UICollectionViewDataSource, UICollectionView
         }
     }
     
+    var currentlyChosen: Int
+    
     func getCurrentlySelected() {
         ApiService.sharedInstance.fetchPollBet(pollId: self.pollId!, completion: { (result: Int) in
             if let pollPosition = self.answerMap[result] {
@@ -52,6 +54,7 @@ class AnswerCollectionView: UIView, UICollectionViewDataSource, UICollectionView
     
     override init(frame: CGRect) {
         self.answerMap = [Int:Int]()
+        self.currentlyChosen = -1
         
         super.init(frame: frame)
         
@@ -90,5 +93,9 @@ class AnswerCollectionView: UIView, UICollectionViewDataSource, UICollectionView
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 10
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.currentlyChosen = indexPath.item
     }
 }

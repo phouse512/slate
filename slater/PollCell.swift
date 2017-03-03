@@ -81,7 +81,7 @@ class PollCell: UICollectionViewCell {
     // question view
     let questionView : UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor.clear
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -89,7 +89,7 @@ class PollCell: UICollectionViewCell {
     let questionLabel : UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = UIColor.white
+        label.backgroundColor = UIColor.clear
         label.text = "Bulls or Cavaliers - 2/03/17"
         label.layoutMargins = UIEdgeInsets(top: -5, left: 0, bottom: 0, right: 0)
         label.numberOfLines = 2
@@ -98,7 +98,7 @@ class PollCell: UICollectionViewCell {
     
     let separatorView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor.clear
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -106,14 +106,14 @@ class PollCell: UICollectionViewCell {
     // time view details
     let timeView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor.clear
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
     let timeLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = UIColor.white
+        label.backgroundColor = UIColor.clear
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "5 hours left"
         return label
@@ -122,7 +122,7 @@ class PollCell: UICollectionViewCell {
     // Vote View details
     let voteView: UIView = {
         let view = UIView()
-        view.backgroundColor = UIColor.white
+        view.backgroundColor = UIColor.clear
         view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -133,7 +133,7 @@ class PollCell: UICollectionViewCell {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.contentMode = .scaleAspectFit
         imageView.clipsToBounds = true
-        imageView.backgroundColor = UIColor.white
+        imageView.backgroundColor = UIColor.clear
         return imageView
     }()
     
@@ -141,7 +141,7 @@ class PollCell: UICollectionViewCell {
         let label = UILabel()
         label.text = "12"
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = UIColor.white
+        label.backgroundColor = UIColor.clear
         return label
     }()
     

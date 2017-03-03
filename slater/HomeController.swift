@@ -164,6 +164,11 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! FeedCell
         cell.delegate = self
+        
+        if indexPath.item == 2 {
+            print("here inside collection view")
+            cell.activePoll = false
+        }
         //let colors: [UIColor] = [.blue, .green, .gray, .purple]
         
         //cell.backgroundColor = colors[indexPath.item]

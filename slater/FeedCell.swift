@@ -22,6 +22,12 @@ class FeedCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate, 
         return cv
     }()
     
+    var activePoll = true {
+        didSet {
+            fetchPolls()
+        }
+    }
+    
     let cellId = "pollId"
     let sidebarColors = [UIColor(red: 181/255, green: 105/255, blue: 193/255, alpha: 1),
                          UIColor(red: 87/266, green: 165/255, blue: 63/255, alpha: 1),
@@ -31,10 +37,10 @@ class FeedCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate, 
     var polls: [Poll]?
     
     func fetchPolls() {
-        ApiService.sharedInstance.fetchPolls { (polls: [Poll]) in
+        ApiService.sharedInstance.fetchPolls(active: activePoll, completion: { (polls: [Poll]) in
             self.polls = polls
             self.collectionView.reloadData()
-        }
+        })
     }
     
     override func setupViews() {
@@ -57,6 +63,11 @@ class FeedCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate, 
         cell.poll = polls?[indexPath.item]
         cell.sidebarView.backgroundColor = sidebarColors[indexPath.item % sidebarColors.count]
         cell.delegate = self.delegate
+        
+        if !activePoll {
+            cell.timeLabel.text = "closed"
+            cell.holderView.backgroundColor = UIColor.lightGray
+        }
         return cell
     }
     

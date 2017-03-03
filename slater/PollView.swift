@@ -122,7 +122,18 @@ class PollView: UIView {
         print("bet made")
         voteButton.isEnabled = false
         voteButton.backgroundColor = UIColor.gray
-        ApiService.sharedInstance.makeBet(pollId: 1, userId: 2, completion: { (result: Bool) in
+        if self.answerCollectionView.currentlyChosen < 0 {
+            print("nothing chosen")
+            return
+        }
+        
+        let answerId = self.answerCollectionView.answers?[self.answerCollectionView.currentlyChosen].id
+        if answerId == nil {
+            print("answer id is nil, that's bad")
+            return
+        }
+        
+        ApiService.sharedInstance.makeBet(pollId: (self.poll?.id)!, answerId: answerId!, completion: { (result: Bool) in
             print(result)
             self.voteButton.isEnabled = true
             self.voteButton.backgroundColor = ColorConstants.betButtonColor
