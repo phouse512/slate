@@ -37,7 +37,7 @@ class ApiService: NSObject {
             if let httpStatus = response as? HTTPURLResponse {
                 if httpStatus.statusCode >= 300 {
                     print("not working")
-                    print(data)
+                    print(data ?? "test")
                     return
                 }
             }
@@ -188,6 +188,70 @@ class ApiService: NSObject {
                 print(jsonError)
             }
         }.resume()
+    }
+    
+    func fetchUserDetails(completion: @escaping(UserDetails) -> ()) {
+        let url = URL(string: baseUrl + "user/detail")
+        var request = URLRequest(url: url!)
+        request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
+        request.setValue((UserDefaults.standard.object(forKey: "session") as! String), forHTTPHeaderField: "auth")
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            
+            if error != nil {
+                print(error!)
+                return
+            }
+            
+            if let httpStatus = response as? HTTPURLResponse {
+                if httpStatus.statusCode >= 300 {
+                    print("fetch user details not working")
+                    return
+                }
+            }
+            
+            do {
+                let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
+                let parsedData = json as! [String:Any]
+                let userDetails = UserDetails()
+
+                for details_dict in parsedData["closed_bets"] as! [[String: AnyObject]] {
+                    
+                    let title = details_dict["title"] as! String?
+                    let buyIn = details_dict["buy_in"] as! Int?
+                    let choice = details_dict["choice"] as! String?
+                    
+                    let voteDetail = VoteDetails(title: title!, buyIn: buyIn!, choice: choice!)
+                    userDetails.closedBets.append(voteDetail)
+                }
+                
+                for details_dict in parsedData["open_bets"] as! [[String: AnyObject]] {
+                    
+                    let title = details_dict["title"] as! String?
+                    let buyIn = details_dict["buy_in"] as! Int?
+                    let choice = details_dict["choice"] as! String?
+                    
+                    let voteDetail = VoteDetails(title: title!, buyIn: buyIn!, choice: choice!)
+                    userDetails.openBets.append(voteDetail)
+                }
+                
+                for details_dict in parsedData["winnings"] as! [[String: AnyObject]] {
+                    
+                    let title = details_dict["title"] as! String?
+                    let winnings = details_dict["winnings"] as! Int?
+                    
+                    let winDetail = WinningDetails(title: title!, winnings: winnings!)
+                    userDetails.winnings.append(winDetail)
+                }
+                DispatchQueue.main.async {
+                    completion(userDetails)
+                }
+                
+            } catch let jsonError {
+                print(jsonError)
+            }
+        }.resume()
+        
     }
     
     func loginRequest(username: String, password: String, completion: @escaping(AuthResponse) -> ()) {
