@@ -30,6 +30,7 @@
 		23A7AEA41E4D60C90083CA53 /* LeaderboardCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A7AEA31E4D60C90083CA53 /* LeaderboardCell.swift */; };
 		23A7AEA61E4D64AE0083CA53 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A7AEA51E4D64AE0083CA53 /* User.swift */; };
 		23A7AEA81E4D65930083CA53 /* LeaderboardCellItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23A7AEA71E4D65930083CA53 /* LeaderboardCellItem.swift */; };
+		23F514BE1E6C84F900B1A692 /* SignupCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23F514BD1E6C84F900B1A692 /* SignupCell.swift */; };
 		23FBC4941E399D330097F43E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FBC4931E399D330097F43E /* AppDelegate.swift */; };
 		23FBC4961E399D330097F43E /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FBC4951E399D330097F43E /* HomeController.swift */; };
 		23FBC4991E399D330097F43E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23FBC4971E399D330097F43E /* Main.storyboard */; };
@@ -61,6 +62,7 @@
 		23A7AEA31E4D60C90083CA53 /* LeaderboardCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaderboardCell.swift; sourceTree = "<group>"; };
 		23A7AEA51E4D64AE0083CA53 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		23A7AEA71E4D65930083CA53 /* LeaderboardCellItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeaderboardCellItem.swift; sourceTree = "<group>"; };
+		23F514BD1E6C84F900B1A692 /* SignupCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignupCell.swift; sourceTree = "<group>"; };
 		23FBC4901E399D330097F43E /* slater.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = slater.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		23FBC4931E399D330097F43E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		23FBC4951E399D330097F43E /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
@@ -103,12 +105,12 @@
 		239594601E3FE8CB005B790D /* View */ = {
 			isa = PBXGroup;
 			children = (
+				23F514BC1E6C84BF00B1A692 /* IntroViews */,
 				238BAE141E597FCD00AEAFDA /* GenericViews */,
 				238BAE111E58CDFF00AEAFDA /* PollView */,
 				239594611E3FE91F005B790D /* PollCell.swift */,
 				239594641E3FEAA7005B790D /* MenuBar.swift */,
 				239594711E4161A8005B790D /* FeedCell.swift */,
-				239594771E427C16005B790D /* LoginCell.swift */,
 				23A7AEA11E4D3ED90083CA53 /* AccountCell.swift */,
 				23A7AEA31E4D60C90083CA53 /* LeaderboardCell.swift */,
 				23A7AEA71E4D65930083CA53 /* LeaderboardCellItem.swift */,
@@ -154,6 +156,15 @@
 				2395946D1E4069F4005B790D /* ApiService.swift */,
 			);
 			name = ApiService;
+			sourceTree = "<group>";
+		};
+		23F514BC1E6C84BF00B1A692 /* IntroViews */ = {
+			isa = PBXGroup;
+			children = (
+				239594771E427C16005B790D /* LoginCell.swift */,
+				23F514BD1E6C84F900B1A692 /* SignupCell.swift */,
+			);
+			name = IntroViews;
 			sourceTree = "<group>";
 		};
 		23FBC4871E399D330097F43E = {
@@ -281,6 +292,7 @@
 				239594681E3FEF9F005B790D /* AddConstraints.swift in Sources */,
 				239594701E407931005B790D /* RGB.swift in Sources */,
 				239594721E4161A8005B790D /* FeedCell.swift in Sources */,
+				23F514BE1E6C84F900B1A692 /* SignupCell.swift in Sources */,
 				239594741E4257BA005B790D /* LoginController.swift in Sources */,
 				238BAE131E58F98900AEAFDA /* AnswerCollectionViewCell.swift in Sources */,
 				239594781E427C16005B790D /* LoginCell.swift in Sources */,

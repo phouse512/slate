@@ -88,14 +88,6 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     func setupNavBarButtons() {
-//        let searchImage = UIImage(named: "search2")
-//        searchImage?.withRenderingMode(.alwaysOriginal)
-//        let searchBarButtomItem = UIBarButtonItem(image: searchImage, style: .plain, target: self, action: #selector(handleSearch))
-//        
-//        let moreButton = UIBarButtonItem(image: UIImage(named: "more2")?.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(handleMore))
-//        
-//        
-//        navigationItem.rightBarButtonItems = [moreButton, searchBarButtomItem]
     }
     
     func handleSearch() {
@@ -111,6 +103,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     func scrollToMenuIndex(menuIndex: Int) {
         let indexPath = NSIndexPath(item: menuIndex, section: 0)
         collectionView?.scrollToItem(at: indexPath as IndexPath, at: .centeredHorizontally, animated: true)
+        fetchUser()
         
         setTitleForIndex(index: menuIndex)
     }
@@ -146,6 +139,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         menuBar.horizontalBarLeftAnchorConstraint?.constant = scrollView.contentOffset.x/4
+        fetchUser()
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

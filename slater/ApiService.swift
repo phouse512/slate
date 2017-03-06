@@ -254,6 +254,60 @@ class ApiService: NSObject {
         
     }
     
+    func createUser(username: String, password: String, completion: @escaping(Bool) -> ()) {
+        
+        let url = URL(string: baseUrl + "signup")
+        var request = URLRequest(url: url!)
+        request.httpMethod = "POST"
+        request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
+        
+        var dataBlob = [String:String]()
+        dataBlob["username"] = username
+        dataBlob["pw"] = password
+        
+        do {
+            let data = try JSONSerialization.data(withJSONObject: dataBlob, options: .prettyPrinted)
+            request.httpBody = data
+        } catch {
+            print(error.localizedDescription)
+            return
+        }
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            
+            if error != nil {
+                print(error!)
+                DispatchQueue.main.async {
+                    completion(false)
+                }
+            }
+            
+            do {
+                if let httpStatus = response as? HTTPURLResponse {
+                    if httpStatus.statusCode != 200 {
+                        print("received non-200 status code: \(httpStatus.statusCode)")
+                        DispatchQueue.main.async {
+                            completion(false)
+                        }
+                        return
+                    }
+                }
+                
+//                let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
+//                print(json)
+//                
+                DispatchQueue.main.async {
+                    completion(true)
+                }
+            } catch let jsonError{
+                print(jsonError)
+                
+            }
+        }.resume()
+        
+        
+    }
+    
     func loginRequest(username: String, password: String, completion: @escaping(AuthResponse) -> ()) {
         
         let url = URL(string: baseUrl + "login")

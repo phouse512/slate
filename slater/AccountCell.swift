@@ -62,6 +62,9 @@ class AccountCell: BaseCell, UITableViewDelegate, UITableViewDataSource {
     }()
     
     func handleRefresh() {
+        refreshButton.isEnabled = false
+        refreshButton.backgroundColor = UIColor.gray
+        print("refresh")
         loadUserDetails()
     }
     
@@ -71,6 +74,7 @@ class AccountCell: BaseCell, UITableViewDelegate, UITableViewDataSource {
     
     func loadUserDetails() {
         ApiService.sharedInstance.fetchUserDetails(completion: { (userDetails: UserDetails) in
+            print("attemptying to reload..")
             self.userDetails = userDetails
             self.openBets.reloadData()
             self.openBets.sizeToFit()
@@ -78,6 +82,8 @@ class AccountCell: BaseCell, UITableViewDelegate, UITableViewDataSource {
             self.closedBets.sizeToFit()
             self.winnings.reloadData()
             self.winnings.sizeToFit()
+            self.refreshButton.isEnabled = true
+            self.refreshButton.backgroundColor = ColorConstants.betButtonColor
         })
     }
     
