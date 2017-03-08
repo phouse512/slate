@@ -319,6 +319,15 @@ class ApiService: NSObject {
         dataBlob["username"] = username
         dataBlob["pw"] = password
         
+        print("inside login")
+        let deviceToken = UserDefaults.standard.object(forKey: "deviceToken")
+        print("ARGS DEVICE TOKEN BOOM \(deviceToken)")
+        if let deviceToken = UserDefaults.standard.object(forKey: "deviceToken") {
+            print("inside")
+            print(deviceToken)
+            dataBlob["device_token"] = deviceToken as! String
+        }
+        
         do {
             let data = try JSONSerialization.data(withJSONObject: dataBlob, options: .prettyPrinted)
             //let decoded = try JSONSerialization.jsonObject(with: data, options: []) as! String
