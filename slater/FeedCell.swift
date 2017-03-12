@@ -22,6 +22,17 @@ class FeedCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate, 
         return cv
     }()
     
+    lazy var refreshButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = ColorConstants.betButtonColor
+        button.setTitle("Refresh", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.addTarget(self, action: #selector(fetchPolls), for: .touchUpInside)
+        button.layer.cornerRadius = 8
+        return button
+    }()
+    
     var activePoll = true {
         didSet {
             fetchPolls()
@@ -47,9 +58,11 @@ class FeedCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate, 
         super.setupViews()
         fetchPolls()
         
+        addSubview(refreshButton)
         addSubview(collectionView)
+        addConstraintsWithFormat(format: "H:|-10-[v0]-10-|", views: refreshButton)
         addConstraintsWithFormat(format: "H:|[v0]|", views: collectionView)
-        addConstraintsWithFormat(format: "V:|[v0]|", views: collectionView)
+        addConstraintsWithFormat(format: "V:|-5-[v0(40)]-1-[v1]|", views: refreshButton, collectionView)
         
         collectionView.register(PollCell.self, forCellWithReuseIdentifier: cellId)
     }

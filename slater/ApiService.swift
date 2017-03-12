@@ -16,7 +16,7 @@ class ApiService: NSObject {
     let apiKey = "PT0e0Rt3Jp46n6XwN466t8Huqs6vGNrv30OYHWT1"
     
     func fetchPolls(active: Bool, completion: @escaping ([Poll]) -> ()) {
-        print("fetchPolls called")
+        print("fetchPolls called with \(active)")
         var url: URL
         if active {
             url = URL(string: baseUrl + "polls/")!
@@ -317,8 +317,8 @@ class ApiService: NSObject {
                 DispatchQueue.main.async {
                     completion(true)
                 }
-            } catch let jsonError{
-                print(jsonError)
+            } catch let error{
+                print(error)
                 
             }
         }.resume()
@@ -337,12 +337,7 @@ class ApiService: NSObject {
         dataBlob["username"] = username
         dataBlob["pw"] = password
         
-        print("inside login")
-        let deviceToken = UserDefaults.standard.object(forKey: "deviceToken")
-        print("ARGS DEVICE TOKEN BOOM \(deviceToken)")
         if let deviceToken = UserDefaults.standard.object(forKey: "deviceToken") {
-            print("inside")
-            print(deviceToken)
             dataBlob["device_token"] = deviceToken as! String
         }
         

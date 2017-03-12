@@ -63,7 +63,7 @@ class PollController: UIViewController {
         setupPollView()
         
     }
-    
+
     private func setupPollView() {
         view.addSubview(pollView)
         

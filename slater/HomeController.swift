@@ -82,10 +82,18 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         setupNavBarButtons()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        updatePolls()
+    }
+    
     // this sends us to the poll
     func goToPollView(poll: Poll, sidebarColor: UIColor) {
         let pollController = PollController(poll: poll, sidebarColor: sidebarColor)
         navigationController?.pushViewController(pollController, animated: true)
+    }
+    
+    func updatePolls() {
+        collectionView?.reloadData()
     }
     
     func setupNavBarButtons() {
