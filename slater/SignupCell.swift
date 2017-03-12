@@ -25,18 +25,13 @@ class SignupCell: UICollectionViewCell {
         let button = UIButton()
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = UIColor.clear
-//        let label = UILabel()
-//        label.translatesAutoresizingMaskIntoConstraints = false
         var attrs = [
             NSFontAttributeName : UIFont.systemFont(ofSize: 14.0),
             NSForegroundColorAttributeName : UIColor.darkGray,
             NSUnderlineStyleAttributeName : 1
         ] as [String : Any]
         
-//        label.attributedText = NSMutableAttributedString(string: "Already signed up? Sign In.", attributes: attrs)
-//        label.textAlignment = NSTextAlignment.center
         button.setAttributedTitle(NSMutableAttributedString(string: "Already signed up? Sign In.", attributes: attrs), for: UIControlState.normal)
-//        button.setTitle("test", for: .normal)
         button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         return button
     }()
@@ -81,7 +76,7 @@ class SignupCell: UICollectionViewCell {
     
     func handleLogin() {
         print("moving to login page")
-        delegate?.moveToLogin()
+        delegate?.moveToPage(page: 2)
     }
     
     override init(frame: CGRect) {

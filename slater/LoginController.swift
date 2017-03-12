@@ -11,7 +11,7 @@ import UIKit
 protocol LoginControllerDelegate: class {
     func finishLoggingIn(username: String, password: String)
     func createUser(username: String, password: String)
-    func moveToLogin()
+    func moveToPage(page: Int)
 }
 
 protocol LogoutDelegate: class {
@@ -43,7 +43,7 @@ class LoginController: UICollectionViewController, UICollectionViewDelegateFlowL
         automaticallyAdjustsScrollViewInsets = false
         
         collectionView?.backgroundColor = UIColor.white
-        collectionView?.register(UICollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+        collectionView?.register(WelcomeCell.self, forCellWithReuseIdentifier: cellId)
         collectionView?.register(LoginCell.self, forCellWithReuseIdentifier: loginCellId)
         collectionView?.register(SignupCell.self, forCellWithReuseIdentifier: signupCellId)
         
@@ -66,10 +66,9 @@ class LoginController: UICollectionViewController, UICollectionViewDelegateFlowL
             return signupCell
         }
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! WelcomeCell
         
-        let colors: [UIColor] = [.gray, .orange, .purple]
-        cell.backgroundColor = colors[indexPath.item]
+        cell.delegate = self
         return cell
     }
     
@@ -77,8 +76,8 @@ class LoginController: UICollectionViewController, UICollectionViewDelegateFlowL
         return CGSize(width: view.frame.width, height: view.frame.height)
     }
     
-    func moveToLogin() {
-        let indexPath = NSIndexPath(item: 2, section: 0)
+    func moveToPage(page: Int) {
+        let indexPath = NSIndexPath(item: page, section: 0)
         collectionView?.scrollToItem(at: indexPath as IndexPath, at: UICollectionViewScrollPosition.centeredHorizontally, animated: true)
     }
     

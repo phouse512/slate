@@ -16,6 +16,7 @@ class ApiService: NSObject {
     let apiKey = "PT0e0Rt3Jp46n6XwN466t8Huqs6vGNrv30OYHWT1"
     
     func fetchPolls(active: Bool, completion: @escaping ([Poll]) -> ()) {
+        print("fetchPolls called")
         var url: URL
         if active {
             url = URL(string: baseUrl + "polls/")!
@@ -44,9 +45,14 @@ class ApiService: NSObject {
             
             do {
                 let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
-                print(json)
+                //print(json)
                 var polls = [Poll]() // need to instantiate this as a new array since it's by default optional
                 //print(json)
+                
+                let formatter = DateFormatter()
+                formatter.locale = Locale(identifier: "en_US_POSIX")
+                formatter.dateFormat = "yyyy-MM-dd HH:mm:ss.SSSSSS"
+                formatter.timeZone = TimeZone(abbreviation: "UTC")
                 
                 for dictionary in json as! [[String: AnyObject]] {
                     let poll = Poll()
@@ -63,6 +69,14 @@ class ApiService: NSObject {
                     poll.buyIn = dictionary["buy_in"] as! Int?
                     poll.currentVoteCount = dictionary["current_votes"] as! Int?
                     poll.title = dictionary["question"] as! String?
+                    poll.closeTime = formatter.date(from: dictionary["close_time"] as! String)
+                    let string_bool = dictionary["voted"] as! Bool
+                    if string_bool {
+                        poll.voted = true
+                    } else {
+                        poll.voted = false
+                    }
+                    
                     polls.append(poll)
                 }
                 
@@ -79,6 +93,7 @@ class ApiService: NSObject {
     }
     
     func fetchPollBet(pollId: Int, completion: @escaping(Int) -> ()) {
+        print("fetchPollBet called")
         let url = URL(string: baseUrl + "polls/\(pollId)/bet/")
         var request = URLRequest(url: url!)
         request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
@@ -112,6 +127,7 @@ class ApiService: NSObject {
     }
     
     func fetchLeaders(completion: @escaping ([User]) -> ()) {
+        print("fetchLeaders called")
         let url = URL(string: baseUrl + "leaderboard")
         var request = URLRequest(url: url!)
         request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
@@ -153,6 +169,7 @@ class ApiService: NSObject {
     }
     
     func fetchUser(completion: @escaping(User) -> ()) {
+        print("fetchUser called")
         let url = URL(string: baseUrl + "user")
         var request = URLRequest(url: url!)
         request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
@@ -191,6 +208,7 @@ class ApiService: NSObject {
     }
     
     func fetchUserDetails(completion: @escaping(UserDetails) -> ()) {
+        print("fetchUserDetails called")
         let url = URL(string: baseUrl + "user/detail")
         var request = URLRequest(url: url!)
         request.setValue(apiKey, forHTTPHeaderField: "x-api-key")
@@ -255,7 +273,7 @@ class ApiService: NSObject {
     }
     
     func createUser(username: String, password: String, completion: @escaping(Bool) -> ()) {
-        
+        print("createUser called")
         let url = URL(string: baseUrl + "signup")
         var request = URLRequest(url: url!)
         request.httpMethod = "POST"
@@ -309,7 +327,7 @@ class ApiService: NSObject {
     }
     
     func loginRequest(username: String, password: String, completion: @escaping(AuthResponse) -> ()) {
-        
+        print("loginRequest called")
         let url = URL(string: baseUrl + "login")
         var request = URLRequest(url: url!)
         request.httpMethod = "POST"
@@ -368,7 +386,7 @@ class ApiService: NSObject {
                 let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
                 let parsedData = json as! [String:Any]
                 authResponse.authToken = parsedData["auth_token"] as! String?
-                print(parsedData)
+                //print(parsedData)
                 
                 DispatchQueue.main.async {
                     completion(authResponse)
@@ -380,7 +398,7 @@ class ApiService: NSObject {
     }
     
     func makeBet(pollId: Int, answerId: Int, completion: @escaping(Bool) -> ()) {
-    
+        print("makeBet called")
         let url = URL(string: baseUrl + "polls/\(pollId)/bet")
         var request = URLRequest(url: url!)
         request.httpMethod = "POST"
@@ -408,7 +426,7 @@ class ApiService: NSObject {
             
             do {
                 let json = try JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
-                print(json)
+                //print(json)
                 
                 let result = true
                 

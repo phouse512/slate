@@ -23,9 +23,25 @@ class PollView: UIView {
                 votesView.text = "\(votes) votes"
             }
             
+            if let date = poll?.closeTime {
+                let dateComponentsFormatter = DateComponentsFormatter()
+                dateComponentsFormatter.allowedUnits = [.year,.month,.weekOfYear,.day,.hour,.minute,.second]
+                dateComponentsFormatter.maximumUnitCount = 1
+                dateComponentsFormatter.unitsStyle = .full
+                if let timeNow = dateComponentsFormatter.string(from: Date(), to: date) {
+                    timeView.text = "\(timeNow) left"
+                }
+            }
+            
             if let buyIn = poll?.buyIn {
                 coinView.coinLabel.text = "\(buyIn)"
                 footerView.coin = buyIn
+            }
+            
+            if let voted = poll?.voted {
+                if voted {
+                    voteButton.setTitle("Update Bet", for: .normal)
+                }
             }
         }
     }

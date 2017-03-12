@@ -31,12 +31,28 @@ class PollCell: UICollectionViewCell {
     
     weak var delegate: HomeControllerDelegate?
     
+    var isActivePoll : Bool = true
+    
     var poll: Poll? {
         didSet {
             questionLabel.text = poll?.title
             
+            if (poll?.voted)! {
+                questionLabel.text = "\(questionLabel.text!) - VOTED"
+            }
+            
             if let buyIn = poll?.buyIn {
                 coinUIView.coinLabel.text = "\(buyIn)"
+            }
+            
+            if let date = poll?.closeTime {
+                let dateComponentsFormatter = DateComponentsFormatter()
+                dateComponentsFormatter.allowedUnits = [.year,.month,.weekOfYear,.day,.hour,.minute,.second]
+                dateComponentsFormatter.maximumUnitCount = 1
+                dateComponentsFormatter.unitsStyle = .full
+                if let timeNow = dateComponentsFormatter.string(from: Date(), to: date) {
+                    timeLabel.text = "\(timeNow) left"
+                }
             }
             
             if let votes = poll?.currentVoteCount {
@@ -57,7 +73,9 @@ class PollCell: UICollectionViewCell {
     }
     
     func handleTap() {
-        delegate?.goToPollView(poll: self.poll!, sidebarColor: sidebarView.backgroundColor ?? UIColor.blue)
+        if isActivePoll {
+            delegate?.goToPollView(poll: self.poll!, sidebarColor: sidebarView.backgroundColor ?? UIColor.blue)
+        }
     }
     
     // sidebar view
@@ -174,7 +192,7 @@ class PollCell: UICollectionViewCell {
         let heightConstraint = NSLayoutConstraint.constraints(withVisualFormat: "V:|-8-[v0]-8-|", options: [], metrics: nil, views: ["v0": timeLabel])
         timeConstraints += heightConstraint
         
-        let widthConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|-8-[v0]-8-|", options: [], metrics: nil, views: ["v0": timeLabel])
+        let widthConstraint = NSLayoutConstraint.constraints(withVisualFormat: "H:|-2-[v0]-2-|", options: [], metrics: nil, views: ["v0": timeLabel])
         timeConstraints += widthConstraint
         
         NSLayoutConstraint.activate(timeConstraints)

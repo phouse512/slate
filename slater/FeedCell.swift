@@ -65,6 +65,7 @@ class FeedCell: BaseCell, UICollectionViewDataSource, UICollectionViewDelegate, 
         cell.delegate = self.delegate
         
         if !activePoll {
+            cell.isActivePoll = false
             cell.timeLabel.text = "closed"
             cell.holderView.backgroundColor = UIColor.lightGray
         }

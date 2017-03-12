@@ -10,6 +10,7 @@ import UIKit
 
 protocol HomeControllerDelegate: class {
     func goToPollView(poll: Poll, sidebarColor: UIColor)
+    func showAlert(message: String)
 }
 
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HomeControllerDelegate, LogoutDelegate {
@@ -100,6 +101,12 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         navigationController?.viewDidLoad()
     }
     
+    func showAlert(message: String) {
+        let alert = UIAlertController(title: "Alert", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func scrollToMenuIndex(menuIndex: Int) {
         let indexPath = NSIndexPath(item: menuIndex, section: 0)
         collectionView?.scrollToItem(at: indexPath as IndexPath, at: .centeredHorizontally, animated: true)
@@ -139,7 +146,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         menuBar.horizontalBarLeftAnchorConstraint?.constant = scrollView.contentOffset.x/4
-        fetchUser()
+        //fetchUser()
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -150,6 +157,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         if indexPath.item == 3 {
             let accountCell = collectionView.dequeueReusableCell(withReuseIdentifier: accountCellId, for: indexPath) as! AccountCell
             accountCell.delegate = self
+            accountCell.homeDelegate = self
+            accountCell.balanceCount = (user?.balance)!
             return accountCell
         } else if indexPath.item == 1 {
             let leaderboardCell = collectionView.dequeueReusableCell(withReuseIdentifier: leaderboardId, for: indexPath) as! LeaderboardCell
