@@ -14,7 +14,7 @@ class LoginCell: UICollectionViewCell {
     
     let userTextField: LeftPaddedTextField = {
         let textField = LeftPaddedTextField()
-        textField.placeholder = "email.."
+        textField.placeholder = "username.."
         textField.layer.borderColor = UIColor.lightGray.cgColor
         textField.layer.borderWidth = 1
         textField.keyboardType = .emailAddress

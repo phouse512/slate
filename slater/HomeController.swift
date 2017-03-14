@@ -166,7 +166,6 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
             let accountCell = collectionView.dequeueReusableCell(withReuseIdentifier: accountCellId, for: indexPath) as! AccountCell
             accountCell.delegate = self
             accountCell.homeDelegate = self
-            accountCell.balanceCount = (user?.balance)!
             return accountCell
         } else if indexPath.item == 1 {
             let leaderboardCell = collectionView.dequeueReusableCell(withReuseIdentifier: leaderboardId, for: indexPath) as! LeaderboardCell

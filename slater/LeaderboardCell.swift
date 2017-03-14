@@ -21,6 +21,7 @@ class LeaderboardCell: BaseCell, UICollectionViewDataSource, UICollectionViewDel
     }()
     
     let cellId = "leaderboardId"
+    let headerId = "headerId"
     
     var users: [User]?
     
@@ -44,6 +45,8 @@ class LeaderboardCell: BaseCell, UICollectionViewDataSource, UICollectionViewDel
 
         
         leaderboardCollection.register(LeaderboardCellItem.self, forCellWithReuseIdentifier: cellId)
+        leaderboardCollection.register(CustomHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerId)
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -58,12 +61,49 @@ class LeaderboardCell: BaseCell, UICollectionViewDataSource, UICollectionViewDel
         return cell
     }
     
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as! CustomHeader
+        
+        return header
+    }
+    
     func collectionView(_: UICollectionView, layout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: leaderboardCollection.frame.width, height: 50)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: self.frame.width, height: 40)
     }
     
     func collectionView(_: UICollectionView, layout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0
     }
     
+}
+
+class CustomHeader: UICollectionReusableView {
+    
+    let headerLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "Weekly Leaderboard"
+        label.backgroundColor = UIColor.clear
+        label.textColor = UIColor.white
+        label.font = UIFont(name: "Helvetica Nueue", size: 24)
+        
+        return label
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        
+        addSubview(headerLabel)
+        
+        addConstraintsWithFormat(format: "H:|-5-[v0]-|", views: headerLabel)
+        addConstraintsWithFormat(format: "V:|-2-[v0]-2-|", views: headerLabel)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }

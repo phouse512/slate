@@ -35,7 +35,7 @@ class WelcomeCell: UICollectionViewCell {
     
     let cashOutLabel: UILabel = {
         let label = UILabel()
-        label.text = "2. Win and take the pool!"
+        label.text = "2. Win coins and rank up!"
         label.textColor = UIColor.white
         label.translatesAutoresizingMaskIntoConstraints = false
         label.textAlignment = NSTextAlignment.center
@@ -43,29 +43,29 @@ class WelcomeCell: UICollectionViewCell {
         return label
     }()
     
-    let coinComparisonView: UIView = {
-        let uiView = UIView()
-        uiView.translatesAutoresizingMaskIntoConstraints = false
-        return uiView
-    }()
-    
-    let coinView: CoinView = {
-        let coinView = CoinView()
-        coinView.translatesAutoresizingMaskIntoConstraints = false
-        coinView.coinLabel.textColor = UIColor.white
-        coinView.coinLabel.text = "850"
-        coinView.coinLabel.font = UIFont(name: coinView.coinLabel.font.fontName, size: 28)
-        return coinView
-    }()
-    
-    let dollarLabel: UILabel = {
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "=    $1"
-        label.font = UIFont(name: label.font.fontName, size: 28)
-        label.textColor = UIColor.white
-        return label
-    }()
+//    let coinComparisonView: UIView = {
+//        let uiView = UIView()
+//        uiView.translatesAutoresizingMaskIntoConstraints = false
+//        return uiView
+//    }()
+//    
+//    let coinView: CoinView = {
+//        let coinView = CoinView()
+//        coinView.translatesAutoresizingMaskIntoConstraints = false
+//        coinView.coinLabel.textColor = UIColor.white
+//        coinView.coinLabel.text = "850"
+//        coinView.coinLabel.font = UIFont(name: coinView.coinLabel.font.fontName, size: 28)
+//        return coinView
+//    }()
+//    
+//    let dollarLabel: UILabel = {
+//        let label = UILabel()
+//        label.translatesAutoresizingMaskIntoConstraints = false
+//        label.text = "=    $1"
+//        label.font = UIFont(name: label.font.fontName, size: 28)
+//        label.textColor = UIColor.white
+//        return label
+//    }()
     
     lazy var startLabel: UIButton = {
         let button = UIButton()
@@ -91,32 +91,31 @@ class WelcomeCell: UICollectionViewCell {
         
         backgroundColor = .purple
         
-        setupDollarView()
+//        setupDollarView()
         
         addSubview(welcomeLabel)
         addSubview(choosePollLabel)
         addSubview(cashOutLabel)
-        addSubview(coinComparisonView)
+//        addSubview(coinComparisonView)
         addSubview(startLabel)
         
         addConstraintsWithFormat(format: "H:|-20-[v0]-20-|", views: welcomeLabel)
         addConstraintsWithFormat(format: "H:|-44-[v0]", views: choosePollLabel)
         addConstraintsWithFormat(format: "H:|-44-[v0]", views: cashOutLabel)
-        addConstraintsWithFormat(format: "H:|-75-[v0]-85-|", views: coinComparisonView)
         addConstraintsWithFormat(format: "H:|-20-[v0]-20-|", views: startLabel)
         
-        addConstraintsWithFormat(format: "V:|-70-[v0]-40-[v1]-20-[v2]-30-[v3(40)]", views: welcomeLabel, choosePollLabel, cashOutLabel, coinComparisonView)
+        addConstraintsWithFormat(format: "V:|-70-[v0]-40-[v1]-20-[v2]", views: welcomeLabel, choosePollLabel, cashOutLabel)
         addConstraintsWithFormat(format: "V:[v0]-30-|", views: startLabel)
     }
     
-    func setupDollarView() {
-        coinComparisonView.addSubview(coinView)
-        coinComparisonView.addSubview(dollarLabel)
-        
-        addConstraintsWithFormat(format: "H:|[v0]-5-[v1]|", views: coinView, dollarLabel)
-        addConstraintsWithFormat(format: "V:|[v0]|", views: coinView)
-        addConstraintsWithFormat(format: "V:|[v0]|", views: dollarLabel)
-    }
+//    func setupDollarView() {
+//        coinComparisonView.addSubview(coinView)
+//        coinComparisonView.addSubview(dollarLabel)
+//        
+//        addConstraintsWithFormat(format: "H:|[v0]-5-[v1]|", views: coinView, dollarLabel)
+//        addConstraintsWithFormat(format: "V:|[v0]|", views: coinView)
+//        addConstraintsWithFormat(format: "V:|[v0]|", views: dollarLabel)
+//    }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

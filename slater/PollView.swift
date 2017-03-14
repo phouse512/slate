@@ -40,7 +40,7 @@ class PollView: UIView {
             
             if let voted = poll?.voted {
                 if voted {
-                    voteButton.setTitle("Update Bet", for: .normal)
+                    voteButton.setTitle("Update Prediction", for: .normal)
                 }
             }
         }
@@ -121,7 +121,7 @@ class PollView: UIView {
         let button = UIButton(type: .system)
         button.backgroundColor = ColorConstants.betButtonColor
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setTitle("Make Bet", for: .normal)
+        button.setTitle("Make Prediction", for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.addTarget(self, action: #selector(handleBet), for: .touchUpInside)
         return button
@@ -135,7 +135,6 @@ class PollView: UIView {
     }()
     
     func handleBet() {
-        print("bet made")
         voteButton.isEnabled = false
         voteButton.backgroundColor = UIColor.gray
         if self.answerCollectionView.currentlyChosen < 0 {

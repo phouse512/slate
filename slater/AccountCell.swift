@@ -15,8 +15,6 @@ class AccountCell: BaseCell, UITableViewDelegate, UITableViewDataSource {
     
     var userDetails: UserDetails?
     
-    var balanceCount: Int = 0
-    
     lazy var openBets: UITableView = {
         let tv = UITableView(frame: .zero)
         tv.translatesAutoresizingMaskIntoConstraints = false
@@ -64,26 +62,26 @@ class AccountCell: BaseCell, UITableViewDelegate, UITableViewDataSource {
         return button
     }()
     
-    lazy var cashoutButton: UIButton = {
-        let button = UIButton(type: .system)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = ColorConstants.betButtonColor
-        button.setTitle("Cash Out", for: .normal)
-        button.setTitleColor(UIColor.white, for: .normal)
-        button.addTarget(self, action: #selector(handleCashout), for: .touchUpInside)
-        return button
-    }()
+//    lazy var cashoutButton: UIButton = {
+//        let button = UIButton(type: .system)
+//        button.translatesAutoresizingMaskIntoConstraints = false
+//        button.backgroundColor = ColorConstants.betButtonColor
+//        button.setTitle("Cash Out", for: .normal)
+//        button.setTitleColor(UIColor.white, for: .normal)
+//        button.addTarget(self, action: #selector(handleCashout), for: .touchUpInside)
+//        return button
+//    }()
     
-    func handleCashout() {
-        var alertMessage = ""
-        if (balanceCount > 850) {
-            alertMessage = "Message Phil to get him to Venmo you!"
-        } else {
-            alertMessage = "You don't have enough coins to cash out yet, get 850 first!"
-        }
-        
-        homeDelegate?.showAlert(message: alertMessage)
-    }
+//    func handleCashout() {
+//        var alertMessage = ""
+//        if (balanceCount > 850) {
+//            alertMessage = "Message Phil to get him to Venmo you!"
+//        } else {
+//            alertMessage = "You don't have enough coins to cash out yet, get 850 first!"
+//        }
+//        
+//        homeDelegate?.showAlert(message: alertMessage)
+//    }
     
     func handleRefresh() {
         refreshButton.isEnabled = false
@@ -117,7 +115,7 @@ class AccountCell: BaseCell, UITableViewDelegate, UITableViewDataSource {
         addSubview(winnings)
         addSubview(logoutButton)
         addSubview(refreshButton)
-        addSubview(cashoutButton)
+//        addSubview(cashoutButton)
         
         addConstraintsWithFormat(format: "H:|-5-[v0]-5-|", views: openBets)
         addConstraintsWithFormat(format: "H:|-5-[v0]-5-|", views: closedBets)
@@ -125,9 +123,9 @@ class AccountCell: BaseCell, UITableViewDelegate, UITableViewDataSource {
         
         addConstraintsWithFormat(format: "H:|-5-[v0]-5-|", views: refreshButton)
         addConstraintsWithFormat(format: "H:|-5-[v0]-5-|", views: logoutButton)
-        addConstraintsWithFormat(format: "H:|-5-[v0]-5-|", views: cashoutButton)
+//        addConstraintsWithFormat(format: "H:|-5-[v0]-5-|", views: cashoutButton)
         addConstraintsWithFormat(format: "V:|-5-[v0(175)]-5-[v1(125)]-5-[v2(120)]", views: openBets, closedBets, winnings)
-        addConstraintsWithFormat(format: "V:[v0(40)]-4-[v1(40)]-4-[v2(40)]-5-|", views: cashoutButton, refreshButton, logoutButton)
+        addConstraintsWithFormat(format: "V:[v0(40)]-4-[v1(40)]-5-|", views: refreshButton, logoutButton)
         
         openBets.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         closedBets.register(UITableViewCell.self, forCellReuseIdentifier: "cell1")
@@ -160,11 +158,11 @@ class AccountCell: BaseCell, UITableViewDelegate, UITableViewDataSource {
         let label = UILabel(frame: CGRect(x: 10, y: 0, width: self.frame.width, height: 40))
         
         if tableView == self.closedBets {
-            label.text = "Closed Bets"
+            label.text = "Closed Predictions"
         } else if tableView == self.openBets {
-            label.text = "Open Bets"
+            label.text = "Open Predictions"
         } else if tableView == self.winnings {
-            label.text = "Recent Winnings"
+            label.text = "Recent Wins"
         }
         
         label.backgroundColor = UIColor.clear
